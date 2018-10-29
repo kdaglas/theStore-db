@@ -1,6 +1,6 @@
 # theStore
 
-[![Build Status](https://travis-ci.org/kdaglas/theStore.svg?branch=theStore-api)](https://travis-ci.org/kdaglas/theStore)
+[![Build Status](https://travis-ci.org/kdaglas/theStore-db.svg?branch=master)](https://travis-ci.org/kdaglas/theStore-db)
 [![Coverage Status](https://coveralls.io/repos/github/kdaglas/theStore/badge.svg?branch=theStore-api)](https://coveralls.io/github/kdaglas/theStore?branch=theStore-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/52d9693284ec4a1080c1826bca7d01a2)](https://www.codacy.com/app/kdaglas/theStore?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kdaglas/theStore&amp;utm_campaign=Badge_Grade)
 
