@@ -31,4 +31,4 @@ def internal_server_error(e):
         returning a message incase of an internal server error '''
     return jsonify({"message": "Internal server error"}), 500
 
-# from thestoreapp.views import user_views, product_views, salerecord_views
+from storeapp.views import user_views
