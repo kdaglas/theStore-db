@@ -9,7 +9,7 @@ services:
 install:
   - pip install -r requirements.txt
 
-# command to tell travis to install postgresql database 
+# command telingl travis to install postgresql database 
 # and create a test database called testingdb
 before_script:
   - psql -c 'CREATE DATABASE testingdb;' -U postgres
