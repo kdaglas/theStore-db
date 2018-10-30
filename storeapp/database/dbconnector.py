@@ -11,7 +11,7 @@ class DatabaseConnection():
             meaning if its a testing environment, then a test database is used where as if its a development
             environment then a development database is created'''
         try:
-            if not storeapp.config['TESTING']:
+            if not app.config['TESTING']:
                 self.dbconnection = psycopg2.connect(database="thestoredb", user="postgres",
                                             password="admin", host="localhost",
                                             port="5432"
