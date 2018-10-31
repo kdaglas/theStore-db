@@ -45,5 +45,16 @@ def fetch_all_products():
     all_products = DatabaseQueries().fetch_all_products()
     if not all_products:
         return jsonify({"message": "No products added yet"}), 404 
-    return jsonify({'All meals': all_products,
+    return jsonify({'All_products': all_products,
                     'message': 'All products have been viewed'}), 200
+
+
+@app.route('/api/v2/products/<productId>', methods=['GET'])
+def fetch_one_products(productId):
+
+    ''' Function that gets all the added products through GET method from the database '''
+    product = DatabaseQueries().fetch_one_product(productId)
+    if not product:
+        return jsonify({"message": "No products added yet"}), 404 
+    return jsonify({'Product': product,
+                    'message': 'Product has been viewed'}), 200

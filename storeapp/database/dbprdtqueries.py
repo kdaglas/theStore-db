@@ -23,3 +23,11 @@ class DatabaseQueries():
         dbcon.cursor.execute(query)
         products = dbcon.cursor.fetchall()
         return products
+
+
+    def fetch_one_product(self, productId):
+        '''method that retieves one product from the database'''
+        query = """SELECT * FROM products WHERE productId = %s"""
+        dbcon.cursor.execute(query, (productId,))
+        product = dbcon.cursor.fetchone()
+        return product
