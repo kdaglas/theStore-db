@@ -11,23 +11,6 @@ class DatabaseConnection():
         '''This constructor creates a connection to the database depending on the configuration
             meaning if its a testing environment, then a test database is used where as if its a development
             environment then a development database is created'''
-        # try:
-        #     if os.getenv('APP_SETTINGS') == "testing":
-        #         dbname = 'testdb'
-        #     else:
-        #         dbname = 'thestoredb'
-        #     self.dbconnection = psycopg2.connect(database=dbname, user="postgres",
-        #                                         password="admin", host="localhost",
-        #                                         port="5432"
-        #                                         )
-
-        #     self.dbconnection.autocommit = True
-        #     self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
-
-        # except(Exception, psycopg2.DatabaseError) as e:
-        #     print('Cannot connect to the database')
-        #     print(e)
-
         try:
             if not app.config['TESTING']:
                 self.dbconnection = psycopg2.connect(database="thestoredb", user="postgres",
