@@ -55,6 +55,16 @@ def fetch_one_products(productId):
     ''' Function that gets all the added products through GET method from the database '''
     product = DatabaseQueries().fetch_one_product(productId)
     if not product:
-        return jsonify({"message": "No products added yet"}), 404 
+        return jsonify({"message": "No products with that id"}), 404 
     return jsonify({'Product': product,
                     'message': 'Product has been viewed'}), 200
+
+
+@app.route('/api/v2/products/<productId>', methods=['DELETE'])
+def delete_a_product(productId):
+
+    ''' Function that gets all the added products through GET method from the database '''
+    deleted = DatabaseQueries().delete_one_product(productId)
+    if not deleted:
+        return jsonify({"message": "No products with that id"}), 404 
+    return jsonify({'message': "Successfully deleted product"}), 200

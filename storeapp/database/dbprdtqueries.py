@@ -31,3 +31,11 @@ class DatabaseQueries():
         dbcon.cursor.execute(query, (productId,))
         product = dbcon.cursor.fetchone()
         return product
+
+
+    def delete_one_product(self, productId):
+        '''method that deletes one product from the database'''
+        query = """DELETE FROM products WHERE productId = %s"""
+        deleted_row = dbcon.cursor.rowcount
+        dbcon.cursor.execute(query, (productId,))
+        return deleted_row
