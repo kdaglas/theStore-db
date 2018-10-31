@@ -2,7 +2,7 @@ from storeapp.database.dbconnector import DatabaseConnection
 import psycopg2
 import psycopg2.extras as dictionary
 from storeapp import app
-import datetime
+from flask_jwt_extended import create_access_token
 
 
 dbcon = DatabaseConnection()
@@ -17,20 +17,10 @@ class Attendant():
         self.password = password
         self.role = role
 
-
-    def check_same_credits(self):
-        '''method to check if both usernam and password existin the db'''
-        dbcon.cursor.execute("""SELECT attendant_name, password FROM attendants WHERE attendant_name = %s and password = %s""",
-                            (self.attendant_name, self.password,))
-        login = dbcon.cursor.fetchone()
-        return login
-
-    def get_attendant_by_name(self):
-        '''method to return an attendant by name the db'''
-        try:
-            dbcon.cursor.execute("""SELECT * FROM attendants WHERE attendant_name = %s""",(self.attendant_name,))
-            attendant = dbcon.cursor.fetchone()
-            return attendant
-        except:
-            return "Attendant with that id doesnot exist"
-            
+    
+    def add_attendant(self):
+        '''method that registers or adds a user to the database'''
+        query = """INSERT INTO attendants(attendant_name, contact, password, role) 
+                    VALUES (%s, %s, %s, %s)"""      
+        dbcon.cursor.execute(query, (self.attendant_name, self.contact, self.password, self.role))
+        return  "You have successfully added {}".format(self.attendant_name)

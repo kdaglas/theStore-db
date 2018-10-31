@@ -1,6 +1,6 @@
 ''' These are the imports for the required packages '''
 from storeapp.database.dbconnector import DatabaseConnection
-import psycopg2
+from storeapp.database.dbuserqueries import DatabaseQueries
 from storeapp import app
 from storeapp.validation import Validator
 from flask_jwt_extended import create_access_token, jwt_required
@@ -24,16 +24,12 @@ def login():
     attendant_name = reg_info.get('attendant_name')
     password = reg_info.get('password')
 
-    user_data = Attendant(attendant_name, None, password, None)
-    same_data = user_data.check_same_credits()
+    same_data = DatabaseQueries().authenticate_attendant(attendant_name, password)
     if not same_data:
         return jsonify({"message": "Invalid username or password"}), 401
-    log = Attendant(attendant_name, None, None, None)
-    logged_in = log.get_attendant_by_name()
+    logged_in = DatabaseQueries().get_attendant_by_name(attendant_name)
     '''Creating an access token'''
     expires = datetime.timedelta(days=1)
     access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
     return jsonify({"message": "You have been logged in",
-                    "space": "-----------------------------------------------------------------------------",
                     "token": access_token}), 200
-                    
