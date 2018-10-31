@@ -66,3 +66,18 @@ def add_attendant():
             return jsonify({"message":valid}), 400
     except:
         return jsonify({"Error": "Some fields are missing, please check"}), 400
+
+
+@app.route("/api/v2/auth/signup/<attendantId>", methods=["PUT"])
+@jwt_required
+def make_attendant_admin(attendantId):
+    
+    ''' This function uses the PUT method to update the role of the attendant with
+        that given attendantId. it takes in an attendant id and searches for that attendant
+        with that id and then returns an attendant who is now admin '''
+    reg_info = request.get_json()
+    role = reg_info.get('role')
+
+    DatabaseQueries().promote_to_admin(attendantId, role)
+    return jsonify({'message': 'Attendant is now admin'}), 200
+    
