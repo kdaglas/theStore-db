@@ -1,5 +1,5 @@
-from thestoreapp.database.dbconnector import DatabaseConnection
-from thestoreapp.models.user_model import Attendant
+from storeapp.database.dbconnector import DatabaseConnection
+from storeapp.models.user_model import Attendant
 import psycopg2
 import psycopg2.extras as dictionary
 

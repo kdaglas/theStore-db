@@ -1,5 +1,5 @@
 import psycopg2
-from thestoreapp import app
+from storeapp import app
 import psycopg2.extras as dictionary
 import os
 
