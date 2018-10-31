@@ -36,3 +36,14 @@ def add_product():
             return jsonify({"message":valid}), 400
     except:
         return jsonify({"Error": "Some fields are missing, please check"}), 400
+
+
+@app.route('/api/v2/products', methods=['GET'])
+def fetch_all_products():
+
+    ''' Function that gets all the added products through GET method from the database '''
+    all_products = DatabaseQueries().fetch_all_products()
+    if not all_products:
+        return jsonify({"message": "No products added yet"}), 404 
+    return jsonify({'All meals': all_products,
+                    'message': 'All products have been viewed'}), 200
