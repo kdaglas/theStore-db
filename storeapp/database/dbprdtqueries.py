@@ -15,3 +15,11 @@ class DatabaseQueries():
         dbcon.cursor.execute(query, (product_name,))
         product = dbcon.cursor.fetchone()
         return product
+
+
+    def fetch_all_products(self):
+        '''method that retieves all the product from the database'''
+        query = """SELECT * FROM products"""
+        dbcon.cursor.execute(query)
+        products = dbcon.cursor.fetchall()
+        return products
