@@ -4,10 +4,12 @@ from storeapp.database.dbprdtqueries import DatabaseQueries
 import psycopg2
 from storeapp import app
 from storeapp.validation import Validator
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from flask import request, jsonify, json
 from storeapp.models.product_model import Product
 
+
+dbquery = DatabaseQueries()
 
 @app.route('/api/v2/products', methods=['POST'])
 def add_product():
@@ -25,7 +27,7 @@ def add_product():
 
         if valid == True:
             '''checking for similar data'''
-            same_name = DatabaseQueries().get_product_by_name(product_name)
+            same_name = dbquery.get_product_by_name(product_name)
             if same_name:
                 return jsonify({"message":"Product already exists, just update the quantity"}), 400
             '''Add the product'''
@@ -42,7 +44,7 @@ def add_product():
 def fetch_all_products():
 
     ''' Function that gets all the added products through GET method from the database '''
-    all_products = DatabaseQueries().fetch_all_products()
+    all_products = dbquery.fetch_all_products()
     if not all_products:
         return jsonify({"message": "No products added yet"}), 404 
     return jsonify({'All_products': all_products,
@@ -50,12 +52,16 @@ def fetch_all_products():
 
 
 @app.route('/api/v2/products/<productId>', methods=['GET'])
-def fetch_one_products(productId):
+def fetch_one_product(productId):
 
-    ''' Function that gets all the added products through GET method from the database '''
-    product = DatabaseQueries().fetch_one_product(productId)
+    ''' Function that gets one the added products through GET method from the database '''
+    valid = Validator.validate_input_type(productId)
+
+    if valid:
+        return jsonify({"message":valid}), 400
+    product = dbquery.fetch_one_product(productId)
     if not product:
-        return jsonify({"message": "No products with that id"}), 404 
+        return jsonify({"message": "No product with that id"}), 404 
     return jsonify({'Product': product,
                     'message': 'Product has been viewed'}), 200
 
@@ -63,8 +69,24 @@ def fetch_one_products(productId):
 @app.route('/api/v2/products/<productId>', methods=['DELETE'])
 def delete_a_product(productId):
 
-    ''' Function that gets all the added products through GET method from the database '''
-    deleted = DatabaseQueries().delete_one_product(productId)
+    ''' Function that deletes an added product through DELETE method from the database '''
+    valid = Validator.validate_input_type(productId)
+
+    if valid:
+        return jsonify({"message":valid}), 400
+    deleted = dbquery.delete_one_product(productId)
     if not deleted:
         return jsonify({"message": "No products with that id"}), 404 
     return jsonify({'message': "Successfully deleted product"}), 200
+
+
+@app.route('/api/v2/products/<productId>', methods=['PUT'])
+def update_a_product(productId):
+
+    '''Function for updating the quantity or price of a product '''
+    pdt_info = request.get_json()
+    unit_price = pdt_info.get("unit_price")
+    quantity = pdt_info.get("quantity")
+
+    dbquery.update_one_product(productId, unit_price, quantity)
+    return jsonify({'message': 'Product has been updated'}), 200

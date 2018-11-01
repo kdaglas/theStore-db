@@ -9,6 +9,8 @@ from storeapp.models.user_model import Attendant
 import datetime
 
 
+dbquery = DatabaseQueries()
+
 @app.route("/api/v2/auth/login", methods=['POST'])
 def login():
     
@@ -24,10 +26,10 @@ def login():
     attendant_name = reg_info.get('attendant_name')
     password = reg_info.get('password')
 
-    same_data = DatabaseQueries().authenticate_attendant(attendant_name, password)
+    same_data = dbquery.authenticate_attendant(attendant_name, password)
     if not same_data:
         return jsonify({"message": "Invalid username or password"}), 401
-    logged_in = DatabaseQueries().get_attendant_by_name(attendant_name)
+    logged_in = dbquery.get_attendant_by_name(attendant_name)
     '''Creating an access token'''
     expires = datetime.timedelta(days=1)
     access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
@@ -52,10 +54,10 @@ def add_attendant():
 
         if valid == True:
             '''Validating and checking for similar data'''
-            same_name = DatabaseQueries().get_attendant_by_name(attendant_name)
+            same_name = dbquery.get_attendant_by_name(attendant_name)
             if same_name:
                 return jsonify({"message":"Attendant name already exists, use another"}), 400
-            same_contact = DatabaseQueries().get_attendant_by_contact(contact)
+            same_contact = dbquery.get_attendant_by_contact(contact)
             if same_contact:
                 return jsonify({"message":"Contact already exists, use another"}), 400
             '''Register the customer'''
@@ -78,6 +80,6 @@ def make_attendant_admin(attendantId):
     reg_info = request.get_json()
     role = reg_info.get('role')
 
-    DatabaseQueries().promote_to_admin(attendantId, role)
+    dbquery.promote_to_admin(attendantId, role)
     return jsonify({'message': 'Attendant is now admin'}), 200
     
