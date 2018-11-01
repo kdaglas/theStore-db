@@ -11,21 +11,40 @@ class DatabaseConnection():
         '''This constructor creates a connection to the database depending on the configuration
             meaning if its a testing environment, then a test database is used where as if its a development
             environment then a development database is created'''
+        # try:
+        #     if not app.config['TESTING']:
+        #         self.dbconnection = psycopg2.connect(database="thestoredb", user="postgres",
+        #                                     password="admin", host="localhost",
+        #                                     port="5432"
+        #                                     )
+        #     else:
+        #         self.dbconnection = psycopg2.connect(database="testdb", user="postgres",
+        #                                     password="admin", host="localhost",
+        #                                     port="5432"
+        #                                     )
+        #     self.dbconnection.autocommit = True
+        #     self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
+        # except:
+        #     print('Cannot connect to the database')
+
+
+
         try:
-            if not app.config['TESTING']:
-                self.dbconnection = psycopg2.connect(database="thestoredb", user="postgres",
-                                            password="admin", host="localhost",
-                                            port="5432"
-                                            )
+            if os.getenv('APP_SETTINGS') == "testing":
+                dbname = 'testdb'
             else:
-                self.dbconnection = psycopg2.connect(database="testdb", user="postgres",
-                                            password="admin", host="localhost",
-                                            port="5432"
-                                            )
+                dbname = 'thestoredb'
+            self.dbconnection = psycopg2.connect(database=dbname, user="postgres",
+                                                password="admin", host="localhost",
+                                                port="5432"
+                                                )
+
             self.dbconnection.autocommit = True
             self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
-        except:
-            print('Cannot connect to the database')
+            # print(dbname)
+
+        except(Exception, psycopg2.DatabaseError) as e:
+            print('Cannot connect to the database {}'.format(e))
 
     
     def create_tables(self):

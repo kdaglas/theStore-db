@@ -3,7 +3,7 @@ from storeapp.database.dbconnector import DatabaseConnection
 from storeapp.database.dbuserqueries import DatabaseQueries
 from storeapp import app
 from storeapp.validation import Validator
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from flask import request, jsonify, json
 from storeapp.models.user_model import Attendant
 import datetime
@@ -38,7 +38,7 @@ def login():
 
 
 @app.route("/api/v2/auth/signup", methods=['POST'])
-# @jwt_required
+@jwt_required
 def add_attendant():
 
     ''' Function adds an attendant through POST method by taking in

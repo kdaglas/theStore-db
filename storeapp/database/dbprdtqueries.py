@@ -8,7 +8,7 @@ dbcon = DatabaseConnection()
 
 class DatabaseQueries():
 
-    '''these are methods to perform certain queries to the database'''
+    '''these are methods to perfrmm certain queriey to the database'''
     def get_product_by_name(self, product_name):
         '''method that checks for same product name in the database'''
         query = """SELECT * FROM products WHERE product_name = %s"""
@@ -41,9 +41,17 @@ class DatabaseQueries():
         return deleted_row
 
 
-    def update_one_product(self, unit_price, quantity, productId):
+    def update_one_product(self, quantity, productId):
         '''method that deletes one product from the database'''
-        query = """UPDATE products SET unit_price = %s, quantity = %s WHERE productId = %s"""
+        query = """UPDATE products SET quantity = %s  WHERE productId = %s"""
+        dbcon.cursor.execute(query, (productId, quantity,))
         updated_row = dbcon.cursor.rowcount
-        dbcon.cursor.execute(query, (productId, unit_price, quantity,))
+        return updated_row
+
+
+    def update_product_price(self, unit_price, productId):
+        '''method that deletes one product from the database'''
+        query = """UPDATE products SET unit_price = %s  WHERE productId = %s"""
+        dbcon.cursor.execute(query, (productId, unit_price,))
+        updated_row = dbcon.cursor.rowcount
         return updated_row
