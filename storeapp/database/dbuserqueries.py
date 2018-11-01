@@ -35,4 +35,5 @@ class DatabaseQueries():
 
     def promote_to_admin(self, role, attendantId):
         '''this method returns the new admin'''
-        dbcon.cursor.execute("""UPDATE attendants SET role = %s WHERE attendantId = %s""", (attendantId, role,))
+        query = """UPDATE attendants SET role = %s WHERE attendantId = %s"""
+        dbcon.cursor.execute(query, (attendantId, role,))

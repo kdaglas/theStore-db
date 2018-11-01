@@ -39,3 +39,11 @@ class DatabaseQueries():
         deleted_row = dbcon.cursor.rowcount
         dbcon.cursor.execute(query, (productId,))
         return deleted_row
+
+
+    def update_one_product(self, unit_price, quantity, productId):
+        '''method that deletes one product from the database'''
+        query = """UPDATE products SET unit_price = %s, quantity = %s WHERE productId = %s"""
+        updated_row = dbcon.cursor.rowcount
+        dbcon.cursor.execute(query, (productId, unit_price, quantity,))
+        return updated_row

@@ -60,7 +60,7 @@ class Validator():
         try:
             _input = int(input)
         except ValueError:
-            return "Input should be an integer"
+            return "Id input should be an integer"
 
 
     @classmethod
