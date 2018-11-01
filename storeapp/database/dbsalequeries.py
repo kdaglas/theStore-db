@@ -19,22 +19,19 @@ class SaleDatabaseQueries():
         if not existing_product:
             return 
         if existing_product["quantity"] > int(quantity):
-            product = existing_product["product_name"]
+            product_name = existing_product["product_name"]
             quantity = int(quantity)
             pay_amount = (existing_product["unit_price"]*int(quantity))
             attendant_name = get_jwt_identity()
-            new_sale = SaleRecord(product_name = product, 
-                                    quantity = quantity,
-                                    pay_amount = pay_amount, 
-                                    attendant_name = attendant_name
-                                )
-            SaleRecord.create_sale_record(product_name = new_sale.product_name, 
-                                            quantity = new_sale.quantity,
-                                            pay_amount = new_sale.pay_amount, 
-                                            attendant_name = new_sale.attendant_name)
+            new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
+            SaleRecord.create_sale_record(new_sale.product_name,
+                                            new_sale.quantity,
+                                            new_sale.pay_amount, 
+                                            new_sale.attendant_name)
             new_quantity = int(existing_product["quantity"]) - quantity
-            updated_sale = dbquery.update_one_product(productId, quantity)
-            return True
+            updated_sale = dbquery.update_one_product(productId, new_quantity)
+            return updated_sale
+            # return True
         else:
             return False
 
