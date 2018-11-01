@@ -16,6 +16,8 @@ class SaleDatabaseQueries():
     def create_sales_record(self, productId, quantity):
         
         existing_product = dbquery.fetch_one_product(productId)
+        if not existing_product:
+            return 
         if existing_product["quantity"] > int(quantity):
             product = existing_product["product_name"]
             quantity = int(quantity)

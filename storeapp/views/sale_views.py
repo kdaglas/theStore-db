@@ -1,6 +1,6 @@
 ''' These are the imports for the required packages '''
 from storeapp.database.dbconnector import DatabaseConnection
-from storeapp.database.dbsalequeries import DatabaseQueries
+from storeapp.database.dbsalequeries import SaleDatabaseQueries
 from storeapp.database.dbprdtqueries import DatabaseQueries
 import psycopg2
 from storeapp import app
