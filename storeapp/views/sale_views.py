@@ -1,7 +1,7 @@
 ''' These are the imports for the required packages '''
 from storeapp.database.dbconnector import DatabaseConnection
 from storeapp.database.dbsalequeries import SaleDatabaseQueries
-from storeapp.database.dbprdtqueries import DatabaseQueries
+from storeapp.database.dbprdtqueries import ProductDatabaseQueries
 import psycopg2
 from storeapp import app
 from storeapp.validation import Validator
@@ -9,7 +9,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from flask import request, jsonify, json
 from storeapp.models.sale_model import SaleRecord
 
-product_dbquery = DatabaseQueries()
+product_dbquery = ProductDatabaseQueries()
 sale_dbquery = SaleDatabaseQueries()
 
 @app.route('/api/v2/sales', methods=['POST'])

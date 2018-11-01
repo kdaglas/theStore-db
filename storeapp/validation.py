@@ -95,3 +95,12 @@ class Validator():
             return "Quantity should have no spaces and be in numbers"
         else:
             return True
+
+    @classmethod
+    def validate_role(cls, role):
+
+        ''' method to validate the data of the product from the store owner input '''
+        if (role != "admin" and role != "attendant"):
+            return "Role should either be admin or attendant"
+        else:
+            return True

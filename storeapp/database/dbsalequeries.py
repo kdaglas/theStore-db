@@ -1,5 +1,5 @@
 from storeapp.database.dbconnector import DatabaseConnection
-from storeapp.database.dbprdtqueries import DatabaseQueries
+from storeapp.database.dbprdtqueries import ProductDatabaseQueries
 from storeapp.models.sale_model import SaleRecord
 from flask_jwt_extended import create_access_token, get_jwt_identity
 import psycopg2
@@ -8,7 +8,7 @@ from flask import request, jsonify, json
 
 
 dbcon = DatabaseConnection()
-dbquery = DatabaseQueries()
+dbquery = ProductDatabaseQueries()
 
 class SaleDatabaseQueries():
 
