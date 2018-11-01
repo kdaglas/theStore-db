@@ -27,8 +27,8 @@ def create_sale_record(productId):
             '''checking for the product in product table'''
             existing_product = product_dbquery.fetch_one_product(productId)
             if not existing_product:
-                return "Product selected doesnot exist, choose another"
-            added_sale = sale_dbquery.creat
+                return jsonify({"Product selected doesnot exist, choose another"}), 400
+            added_sale = sale_dbquery.create_sales_record()
 
         
 

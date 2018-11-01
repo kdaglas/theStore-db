@@ -25,6 +25,14 @@ class DatabaseQueries():
         return attendant
 
 
+    def get_attendant_by_role(self, role):
+        '''method to return an attendant by role the db'''
+        query = """SELECT * FROM attendants WHERE role = %s"""
+        dbcon.cursor.execute(query, (role,))
+        attendant = dbcon.cursor.fetchone()
+        return attendant
+
+
     def get_attendant_by_contact(self, contact):
         '''method that checks if attendant contact is already added in the database'''
         query = """SELECT * FROM attendants WHERE contact = %s"""
