@@ -64,28 +64,34 @@ class Validator():
 
 
     @classmethod
-    def validate_sale_record_inputs(cls, product_name, quantity, pay_amount, attendant):
+    def validate_sale_record_inputs(cls, productId, quantity):
 
-        ''' method to validate the data of the product from the store owner input '''
-        if product_name == '':
-            return "Product name is missing"
-        elif not re.search(r"^([a-zA-Z]{5,}\s)?[a-zA-Z]{5,}$", product_name):
-            return "Product should be either one word with more than 5 characters or two words and in characters"
+        ''' method to validate the data of the sale being made '''
+        if productId == '':
+            return "ProductId is missing"
+        elif int(productId) < 1:
+            return "No product with that id"
+        elif not re.search(r"^[0-9]+$", productId):
+            return "ProductId should have no spaces and be in numbers"
         elif quantity == '':
             return "Quantity is missing"
         elif int(quantity) < 1:
             return "Quantity should be more than 0"
         elif not re.search(r"^[0-9]+$", quantity):
             return "Quantity should have no spaces and be in numbers"
-        elif pay_amount == '':
-            return "The amount paid is missing"
-        elif int(pay_amount) < 1:
-            return "The amount paid should be more than 0"
-        elif not re.search(r"^[0-9]{3,}$", pay_amount):
-            return "The amount paid should have no spaces and be in numbers"
-        elif attendant == '':
-            return "Attendant name is missing"
-        elif not re.search(r"^[a-zA-Z]{3,}$", attendant):
-            return "Attendant name should be more than 3 characters and be in characters"
+        else:
+            return True
+
+
+    @classmethod
+    def validate_quantity_input(cls, quantity):
+
+        ''' method to validate the data of the product from the store owner input '''
+        if quantity == '':
+            return "Quantity is missing"
+        elif int(quantity) < 1:
+            return "Quantity should be more than 0"
+        elif not re.search(r"^[0-9]+$", quantity):
+            return "Quantity should have no spaces and be in numbers"
         else:
             return True

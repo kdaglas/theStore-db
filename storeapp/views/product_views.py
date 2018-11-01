@@ -85,8 +85,32 @@ def update_a_product(productId):
 
     '''Function for updating the quantity or price of a product '''
     pdt_info = request.get_json()
-    unit_price = pdt_info.get("unit_price")
     quantity = pdt_info.get("quantity")
 
-    dbquery.update_one_product(productId, unit_price, quantity)
-    return jsonify({'message': 'Product has been updated'}), 200
+    valid = Validator.validate_quantity_input(quantity)
+    if valid == True:
+        updated = dbquery.update_one_product(productId, quantity)
+        if updated:
+            print('success')
+            return jsonify({'message': 'Product has been updated'}), 200
+        return jsonify({'message': 'Product could not be updated'}), 400
+    else:
+        return jsonify({"message":valid}), 400
+
+
+@app.route('/api/v2/products/price/<productId>', methods=['PUT'])
+def update_product_price(productId):
+
+    '''Function for updating the quantity or price of a product '''
+    pdt_info = request.get_json()
+    unit_price = pdt_info.get("unit_price")
+
+    valid = Validator.validate_quantity_input(unit_price)
+    if valid == True:
+        updated = dbquery.update_one_product(productId, unit_price)
+        if updated:
+            print('success')
+            return jsonify({'message': 'Product price has been updated'}), 200
+        return jsonify({'message': 'Product could not be updated'}), 400
+    else:
+        return jsonify({"message":valid}), 400

@@ -2,7 +2,6 @@ from storeapp.database.dbconnector import DatabaseConnection
 import psycopg2
 import psycopg2.extras as dictionary
 from storeapp import app
-from flask_jwt_extended import create_access_token
 
 
 dbcon = DatabaseConnection()
