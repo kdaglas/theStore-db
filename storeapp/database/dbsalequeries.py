@@ -16,24 +16,23 @@ class SaleDatabaseQueries():
     def create_sales_record(self, productId, quantity):
         
         existing_product = dbquery.fetch_one_product(productId)
-        if not existing_product:
-            return 
-        if existing_product["quantity"] > int(quantity):
-            product_name = existing_product["product_name"]
-            quantity = int(quantity)
-            pay_amount = (existing_product["unit_price"]*int(quantity))
-            attendant_name = get_jwt_identity()
-            new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
-            SaleRecord.create_sale_record(new_sale.product_name,
-                                            new_sale.quantity,
-                                            new_sale.pay_amount, 
-                                            new_sale.attendant_name)
-            new_quantity = int(existing_product["quantity"]) - quantity
-            updated_sale = dbquery.update_one_product(productId, new_quantity)
-            return updated_sale
-            # return True
-        else:
+        if existing_product is None:
             return False
+        if existing_product["quantity"] < int(quantity):
+            return False
+        product_name = existing_product["product_name"]
+        quantity = int(quantity)
+        pay_amount = (existing_product["unit_price"]*int(quantity))
+        attendant_name = get_jwt_identity()
+        new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
+        SaleRecord.create_sale_record(new_sale.product_name,
+                                        new_sale.quantity,
+                                        new_sale.pay_amount, 
+                                        new_sale.attendant_name)
+        new_quantity = int(existing_product["quantity"]) - quantity
+        updated_sale = dbquery.update_one_product(productId, new_quantity)
+        return updated_sale
+            
 
 
     def fetch_all_sale_records(self):

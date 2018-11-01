@@ -31,4 +31,4 @@ class SaleRecord():
         query = """INSERT INTO salerecords(product_name, quantity, pay_amount, attendant_name) 
                     VALUES (%s, %s, %s, %s)"""      
         dbcon.cursor.execute(query, (product_name, quantity, pay_amount, attendant_name))
-        return  "You have made a sale record of {}".format(product_name)
+        return  "You have made a sale record"

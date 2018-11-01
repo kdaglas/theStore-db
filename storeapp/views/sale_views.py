@@ -17,23 +17,25 @@ def create_sale_record():
 
     ''' Function for creating a sale record through POST method 
         and storing it in the database '''
-    try:
-        sale_info = request.get_json()
-        productId = sale_info.get("productId")
-        quantity = sale_info.get("quantity")
+    # try:
+     
+    sale_info = request.get_json()
+    productId = sale_info.get("productId")
+    quantity = sale_info.get("quantity")
 
-        valid = Validator.validate_sale_record_inputs(productId, quantity)
-        if valid == True:
-            '''checking for the product in product table'''
-            existing_product = product_dbquery.fetch_one_product(productId)
-            if not existing_product:
-                return jsonify({"Product selected doesnot exist, choose another"}), 400
-            added_sale = sale_dbquery.create_sales_record(productId, quantity)
-            return jsonify({"message": added_sale}), 200
-        else:
-            return jsonify({"message":valid}), 400
-    except:
-        return jsonify({"Error": "Some fields are missing, please check"}), 400
+    valid = Validator.validate_sale_record_inputs(productId, quantity)
+    if valid == True:
+        '''checking for the product in product table'''
+        existing_product = product_dbquery.fetch_one_product(productId)
+        if not existing_product:
+            return jsonify({"Product selected doesnot exist, choose another"}), 400
+        added_sale = sale_dbquery.create_sales_record(productId, quantity)
+        return jsonify({"message": added_sale}), 200
+    else:
+        return jsonify({"message":valid}), 400
+
+    # except:
+    #     return jsonify({"Error": "Some fields are missing, please check"}), 400
 
 
 @app.route('/api/v2/sales', methods=['GET'])

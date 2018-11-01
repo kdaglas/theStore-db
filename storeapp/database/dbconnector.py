@@ -65,7 +65,7 @@ class DatabaseConnection():
                     pay_amount VARCHAR NOT NULL,
                     today TEXT NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP, 'HH:MI:SS YYYY-MM-DD'),
                     FOREIGN KEY (attendantId) REFERENCES attendants(attendantId) ON DELETE CASCADE ON UPDATE CASCADE,
-                    FOREIGN KEY (productId) REFERENCES products(productId) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (product_name) REFERENCES products(product_name) ON DELETE CASCADE ON UPDATE CASCADE
                 )
                 """
             )
