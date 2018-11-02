@@ -52,13 +52,11 @@ class DatabaseConnection():
                 """
                 CREATE TABLE IF NOT EXISTS salerecords (
                     saleId SERIAL PRIMARY KEY NOT NULL,
-                    attendantId INTEGER NOT NULL,
-                    productId INTEGER NOT NULL,
+                    attendant_name VARCHAR NOT NULL,
+                    product_name VARCHAR NOT NULL,
                     quantity INTEGER NOT NULL,
                     pay_amount VARCHAR NOT NULL,
-                    today TEXT NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP, 'HH:MI:SS YYYY-MM-DD'),
-                    FOREIGN KEY (attendantId) REFERENCES attendants(attendantId) ON DELETE CASCADE ON UPDATE CASCADE,
-                    FOREIGN KEY (productId) REFERENCES products(productId) ON DELETE CASCADE ON UPDATE CASCADE
+                    today TEXT NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP, 'HH:MI:SS YYYY-MM-DD')
                 )
                 """
             )

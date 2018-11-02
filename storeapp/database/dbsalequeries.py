@@ -13,7 +13,7 @@ dbquery = ProductDatabaseQueries()
 class SaleDatabaseQueries():
 
     '''these are methods to perform certain queries to the database'''
-    def create_sales_record(self, productId, quantity):
+    def create_sales_record(self, productId, quantity, attendant_name):
         
         existing_product = dbquery.fetch_one_product(productId)
         if existing_product is None:
@@ -23,7 +23,7 @@ class SaleDatabaseQueries():
         product_name = existing_product["product_name"]
         quantity = int(quantity)
         pay_amount = (existing_product["unit_price"]*int(quantity))
-        attendant_name = get_jwt_identity()
+        attendant_name = attendant_name
         new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
         SaleRecord.create_sale_record(new_sale.product_name,
                                         new_sale.quantity,
