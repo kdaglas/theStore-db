@@ -1,6 +1,5 @@
 import unittest
 import json
-# from flask_jwt_extended import create_access_token
 from storeapp import app
 from storeapp.database.dbconnector import DatabaseConnection
 from storeapp.models.user_model import Attendant
