@@ -13,7 +13,7 @@ env:
     - 'APP_SETTINGS'='testing'
 
 before_script:
-  - psql -c 'CREATE DATABASE testingdb;' -U postgres
+  - psql -c 'CREATE DATABASE testdatabase;' -U postgres
  
 script: 
   - nosetests --with-coverage --cover-package=storeapp
