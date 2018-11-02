@@ -41,7 +41,7 @@ def add_product():
             '''Add the product'''
             obj = Product(product_name, unit_price, quantity, category)
             result = obj.add_product()
-            return jsonify({"message": result}), 200
+            return jsonify({"message": result}), 201
         else:
             return jsonify({"message":valid}), 400
     except:

@@ -49,13 +49,18 @@ def fetch_all_sale_records():
     user_identity = get_jwt_identity()
     logged_in = userdbquery.get_attendant_by_name(attendant_name=user_identity)
     
-    if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"})
-    all_sale_records = sale_dbquery.fetch_all_sale_records()
-    if not all_sale_records:
-        return jsonify({"message": "No sale recorded created yet"}), 404 
-    return jsonify({'sale_records': all_sale_records,
-                    'message': 'All sales have been viewed'}), 200
+    if logged_in['role'] == 'admin':
+        all_sale_records = sale_dbquery.fetch_all_sale_records()
+        if not all_sale_records:
+            return jsonify({"message": "No sale recorded created yet"}), 404 
+        return jsonify({'sale_records': all_sale_records,
+                        'message': 'All sales have been viewed'}), 200
+    elif logged_in['role'] == 'attendant':
+        attendant_sale_records = sale_dbquery.get_records_by_name(logged_in)
+        if not attendant_sale_records:
+            return jsonify({"message": "No sale recorded created yet"}), 404 
+        return jsonify({'sale_records': all_sale_records,
+                        'message': 'All sales have been viewed'}), 200
 
 
 @app.route('/api/v2/sales/<saleId>', methods=['GET'])
