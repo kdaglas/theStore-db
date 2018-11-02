@@ -5,6 +5,18 @@ from flask import jsonify, json
 
 class TestProduct(Testing):
 
+    def test_for_invalid_url(self):
+        '''testing for invalid url '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/pr",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.add_product   
+                            )
+        self.assertEqual(resp.status_code, 405)
+        self.assertIn(b"Method not allowed", resp.data)
+
+
     def test_add_product_successful(self):
         '''testing for successful '''
         admin = self.adminlogin()
