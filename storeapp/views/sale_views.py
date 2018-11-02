@@ -55,7 +55,7 @@ def fetch_all_sale_records():
     if not all_sale_records:
         return jsonify({"message": "No sale recorded created yet"}), 404 
     return jsonify({'sale_records': all_sale_records,
-                    'message': 'All products have been viewed'}), 200
+                    'message': 'All sales have been viewed'}), 200
 
 
 @app.route('/api/v2/sales/<saleId>', methods=['GET'])
@@ -69,6 +69,6 @@ def fetch_one_sale(saleId):
         return jsonify({"message":valid}), 400
     sale_record = sale_dbquery.fetch_one_sale_record(saleId)
     if not sale_record:
-        return jsonify({"message": "No product with that id"}), 404 
+        return jsonify({"message": "No sale record with that id"}), 404 
     return jsonify({'sale_record': sale_record,
                     'message': 'Sale record has been viewed'}), 200
