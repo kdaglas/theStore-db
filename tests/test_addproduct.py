@@ -52,6 +52,83 @@ class TestProduct(Testing):
         self.assertEqual(resp.status_code, 201)
         self.assertIn(b"You have successfully added Cookies", resp.data)
 
+    
+    def test_add_product_with_empty_name(self):
+        '''testing for sapace '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_pfields  
+                            )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Product name is missing", resp.data)
+
+
+    def test_add_product_with_empty_price(self):
+        '''testing for sapace '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_ppfields  
+                            )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Unit_price is missing", resp.data)
+
+
+    def test_add_product_with_empty_quabtity(self):
+        '''testing for sapace '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_pppfields  
+                            )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Quantity is missing", resp.data)
+
+
+    def test_add_product_with_empty_category(self):
+        '''testing for sapace '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_ppppfields  
+                            )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Category is missing", resp.data)
+
+
+    def test_add_product_with_bad_name(self):
+        '''testing for bad name '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_pfields  
+                            )
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Product name is missing", resp.data)
+
+
+    def test_adding_existing_product(self):
+        '''testing for duplicate data '''
+        admin= self.adminlogin()
+        resp1 = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.add_product  
+                            )
+        resp = self.app.post("/api/v2/products",
+                                    content_type='application/json', 
+                                    headers=dict(Authorization='Bearer '+admin['token']),
+                                    data=Testing.add_product   
+                                )                      
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Product already exists, just update the quantity", resp.data)
+
 
     def test_for_fetching_empty_product_table(self):
         '''test for fetching all products that dont exist'''
@@ -73,28 +150,28 @@ class TestProduct(Testing):
         self.assertIn(b"No product with that id", resp.data)
 
 
-    # def test_deleting_product(self):
-    #     admin = self.adminlogin()
-    #     # resp = self.app.post("/api/v2/products",
-    #     #                      content_type='application/json', 
-    #     #                      headers=dict(Authorization='Bearer '+admin['token']),
-    #     #                      data=Testing.add_product   
-    #     #                      )
-    #     resp2 = self.app.delete("/api/v2/products/1",
-    #                              content_type='application/json', 
-    #                              headers=dict(Authorization='Bearer '+admin['token']),)
-    #     self.assertEqual(resp2.status_code, 404)
-    #     self.assertIn(b"Successfully deleted product", resp2.data)
+    def test_deleting_product(self):
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                             content_type='application/json', 
+                             headers=dict(Authorization='Bearer '+admin['token']),
+                             data=Testing.add_product   
+                             )
+        resp2 = self.app.delete("/api/v2/products/1",
+                                 content_type='application/json', 
+                                 headers=dict(Authorization='Bearer '+admin['token']),)
+        self.assertEqual(resp2.status_code, 200)
+        self.assertIn(b"Successfully deleted product", resp2.data)
 
 
-    # def test_deleting_product_with_wrong_id(self):
-    #     admin= self.adminlogin()
-    #     # response = self.app.post("/api/v2/products",
-    #     #                          content_type='application/json', headers=dict(Authorization='Bearer '+admin_login['token']),
-    #     #                          data=json.dumps(dict(product="Life Jackets", quantity="20",unit_price="200"),)   
-    #     #                      )
-    #     resp2 = self.app.delete("/api/v2/products/e",
-    #                                 content_type='application/json', 
-    #                                 headers=dict(Authorization='Bearer '+admin['token']),)                 
-    #     self.assertEqual(resp2.status_code, 400)
-    #     self.assertIn(b"No products with that id", resp2.data)
+    def test_deleting_product_with_wrong_id(self):
+        admin= self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                 content_type='application/json', headers=dict(Authorization='Bearer '+admin['token']),
+                                 data=json.dumps(dict(product="Life Jackets", quantity="20",unit_price="200"),)   
+                             )
+        resp2 = self.app.delete("/api/v2/products/1234567890",
+                                    content_type='application/json', 
+                                    headers=dict(Authorization='Bearer '+admin['token']),)                 
+        self.assertEqual(resp2.status_code, 404)
+        self.assertIn(b"No products with that id", resp2.data)
