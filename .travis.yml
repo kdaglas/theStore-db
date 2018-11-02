@@ -21,7 +21,8 @@ before_script:
 
 # command to run tests 
 script: 
-  - python -m pytest --cov=storeapp tests/
+  # - python -m pytest --cov=storeapp tests/
+  - nosetests --with-coverage --cover-package=storeapp
 
 after_success: 
   - coveralls
