@@ -11,15 +11,20 @@ class Testing(unittest.TestCase):
 
     '''checking user data'''
     registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
-    
+
     add_product = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="foodish"),)
 
     wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
 
-    empty_pfields = json.dumps(dict(product_name="", unit_price="800", quantity="20", category="foodish"),)
-    empty_ppfields = json.dumps(dict(product_name="Cookies", unit_price="", quantity="20", category="foodish"),)
-    empty_pppfields = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="", category="foodish"),)
-    empty_ppppfields = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category=""),)
+    empty_pname = json.dumps(dict(product_name="", unit_price="800", quantity="20", category="foodish"),)
+    empty_price = json.dumps(dict(product_name="Cookies", unit_price="", quantity="20", category="foodish"),)
+    empty_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="", category="foodish"),)
+    empty_category = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category=""),)
+
+    wrong_name = json.dumps(dict(product_name="Cook123", unit_price="800", quantity="20", category="foodish"),)
+    wrong_price = json.dumps(dict(product_name="Cookies", unit_price="mee", quantity="20", category="foodish"),)
+    wrong_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="mee", category="foodish"),)
+    wrong_category = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="12345"),)
 
     wrong_fields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2"),)
     same_values = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)

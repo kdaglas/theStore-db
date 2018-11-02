@@ -11,8 +11,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/pr",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product   
-                            )
+                                data=Testing.add_product )
         self.assertEqual(resp.status_code, 405)
         self.assertIn(b"Please put a valid URL", resp.data)
 
@@ -23,8 +22,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products/67878",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product   
-                            )
+                                data=Testing.add_product )
         self.assertEqual(resp.status_code, 405)
         self.assertIn(b"Method not allowed", resp.data)
 
@@ -35,8 +33,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.wrong_pfields   
-                            )
+                                data=Testing.wrong_pfields)
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Some fields are missing, please check", resp.data)
 
@@ -47,8 +44,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product   
-                            )
+                                data=Testing.add_product )
         self.assertEqual(resp.status_code, 201)
         self.assertIn(b"You have successfully added Cookies", resp.data)
 
@@ -59,8 +55,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_pfields  
-                            )
+                                data=Testing.empty_pname)
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Product name is missing", resp.data)
 
@@ -71,8 +66,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_ppfields  
-                            )
+                                data=Testing.empty_price )
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Unit_price is missing", resp.data)
 
@@ -83,8 +77,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_pppfields  
-                            )
+                                data=Testing.empty_quantity )
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Quantity is missing", resp.data)
 
@@ -95,8 +88,7 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_ppppfields  
-                            )
+                                data=Testing.empty_category)
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Category is missing", resp.data)
 
@@ -107,10 +99,42 @@ class TestProduct(Testing):
         resp = self.app.post("/api/v2/products",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_pfields  
-                            )
+                                data=Testing.wrong_name)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Product name is missing", resp.data)
+        self.assertIn(b"Product name should be one or two words of 5 or more characters each", resp.data)
+
+
+    def test_add_product_with_bad_price(self):
+        '''testing for bad quantity '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.wrong_price)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Unit_price should have no spaces, be 3 or more integers and be in numbers", resp.data)
+
+
+    def test_add_product_with_bad_quantity(self):
+        '''testing for bad quantity '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.wrong_quantity)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Quantity should have no spaces and be in numbers", resp.data)
+
+
+    def test_add_product_with_bad_category(self):
+        '''testing for bad category'''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/products",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.wrong_category)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Category should be 5 or more characters and be in characters", resp.data)
 
 
     def test_adding_existing_product(self):
