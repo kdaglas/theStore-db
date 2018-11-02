@@ -39,8 +39,8 @@ class SaleDatabaseQueries():
         '''method that retieves all the sale records from the database'''
         query = """SELECT * FROM salerecords"""
         dbcon.cursor.execute(query)
-        products = dbcon.cursor.fetchall()
-        return products
+        sale_records = dbcon.cursor.fetchall()
+        return sale_records
 
 
     def fetch_one_sale_record(self, saleId):
@@ -49,3 +49,18 @@ class SaleDatabaseQueries():
         dbcon.cursor.execute(query, (saleId,))
         sale_record = dbcon.cursor.fetchone()
         return sale_record
+
+
+    def fetch_all_sale_records_by_name(self, attendant_name):
+        '''method that retieves all sale records from the database of one user'''
+        query = """SELECT * FROM salerecords WHERE attendant_name = %s"""
+        dbcon.cursor.execute(query, (attendant_name,))
+        sale_records = dbcon.cursor.fetchall()
+        return sale_records
+        
+    def get_records_by_name(self, attendant_name):
+        '''method to return an attendant by name the db'''
+        query = """SELECT * FROM salerecords WHERE attendant_name = %s"""
+        dbcon.cursor.execute(query, (attendant_name,))
+        attendant = dbcon.cursor.fetchall()
+        return attendant    

@@ -22,6 +22,7 @@ class DatabaseConnection():
                                                 )
             self.dbconnection.autocommit = True
             self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
+            
         except(Exception, psycopg2.DatabaseError) as e:
             print('Cannot connect to the database {}'.format(e))
 
