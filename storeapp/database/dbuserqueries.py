@@ -6,7 +6,7 @@ import psycopg2.extras as dictionary
 
 dbcon = DatabaseConnection()
 
-class DatabaseQueries():
+class UserDatabaseQueries():
 
     '''these are methods to perform certain queries to the database'''
     def authenticate_attendant(self, attendant_name, password):

@@ -32,13 +32,6 @@ class DatabaseConnection():
         try:
             queries = (
                 """
-                CREATE TABLE IF NOT EXISTS admin (
-                    adminId SERIAL PRIMARY KEY NOT NULL,
-                    username VARCHAR NOT NULL,
-                    password VARCHAR NOT NULL
-                );
-                """,
-                """
                 CREATE TABLE IF NOT EXISTS attendants (
                     attendantId SERIAL PRIMARY KEY NOT NULL,
                     attendant_name VARCHAR NOT NULL,
@@ -59,20 +52,18 @@ class DatabaseConnection():
                 """
                 CREATE TABLE IF NOT EXISTS salerecords (
                     saleId SERIAL PRIMARY KEY NOT NULL,
-                    attendantId INTEGER NOT NULL,
-                    productId INTEGER NOT NULL,
+                    attendant_name VARCHAR NOT NULL,
+                    product_name VARCHAR NOT NULL,
                     quantity INTEGER NOT NULL,
                     pay_amount VARCHAR NOT NULL,
-                    today TEXT NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP, 'HH:MI:SS YYYY-MM-DD'),
-                    FOREIGN KEY (attendantId) REFERENCES attendants(attendantId) ON DELETE CASCADE ON UPDATE CASCADE,
-                    FOREIGN KEY (product_name) REFERENCES products(product_name) ON DELETE CASCADE ON UPDATE CASCADE
+                    today TEXT NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP, 'HH:MI:SS YYYY-MM-DD')
                 )
                 """
             )
             for query in queries:
                 self.cursor.execute(query)
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
+        except(Exception, psycopg2.DatabaseError) as e:
+            print('Cannot connect to the database {}'.format(e))
 
 
     def delete_tables(self):

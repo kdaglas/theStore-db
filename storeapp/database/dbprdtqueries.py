@@ -6,7 +6,7 @@ import psycopg2.extras as dictionary
 
 dbcon = DatabaseConnection()
 
-class DatabaseQueries():
+class ProductDatabaseQueries():
 
     '''these are methods to perfrmm certain queriey to the database'''
     def get_product_by_name(self, product_name):
@@ -36,13 +36,13 @@ class DatabaseQueries():
     def delete_one_product(self, productId):
         '''method that deletes one product from the database'''
         query = """DELETE FROM products WHERE productId = %s"""
-        deleted_row = dbcon.cursor.rowcount
         dbcon.cursor.execute(query, (productId,))
+        deleted_row = dbcon.cursor.rowcount
         return deleted_row
 
 
     def update_one_product(self, quantity, productId):
-        '''method that deletes one product from the database'''
+        '''method that updatess one product from the database'''
         query = """UPDATE products SET quantity = %s  WHERE productId = %s"""
         dbcon.cursor.execute(query, (productId, quantity,))
         updated_row = dbcon.cursor.rowcount
