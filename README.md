@@ -14,7 +14,7 @@ The api allows the user(store attendant or store owner) to post and get data fro
 ## theStore-db
 
 This application interacts with a PostgreSQL database to save user data and is meant for use in a single store. It should help store owners avoid selling products that have run out of stock. the database version is being hosted by heroku at: 
-- [www.theStore-db.com](https://douglas-thestoredb.herokuapp.com)
+- [www.theStore-db.com](https://douglas-thestore-db.herokuapp.com/)
 
 ### Prerequisites
 
