@@ -15,9 +15,9 @@ class DatabaseConnection():
             if os.getenv('APP_SETTINGS') == "testing":
                 databasename = 'testdatabase'
             else:
-                databasename = 'thestoredb'
-            self.dbconnection = psycopg2.connect(database=databasename, user="postgres",
-                                                password="admin", host="localhost",
+                databasename = 'd4k4mlq2ci52ug'
+            self.dbconnection = psycopg2.connect(database=databasename, user="ircwcswofnokuh",
+                                                password="1015698190d57b0d9e383a761c02e666356f9254232f15cddb12ee58cbe38c8e", host="ec2-54-225-115-234.compute-1.amazonaws.com",
                                                 port="5432"
                                                 )
             self.dbconnection.autocommit = True
