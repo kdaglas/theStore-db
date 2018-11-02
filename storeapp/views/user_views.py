@@ -7,6 +7,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from flask import request, jsonify, json
 from storeapp.models.user_model import Attendant
 import datetime
+from datetime import timedelta
 
 
 dbquery = UserDatabaseQueries()
@@ -25,6 +26,7 @@ def login():
         if not same_data:
             return jsonify({"message": "Invalid username or password"}), 401
         logged_in = dbquery.get_attendant_by_name(attendant_name)
+
         '''Creating an access token'''
         expires = datetime.timedelta(days=1)
         access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
