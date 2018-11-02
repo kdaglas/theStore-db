@@ -12,7 +12,7 @@ class Testing(unittest.TestCase):
     '''checking user data'''
     registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
     add_product = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="foodish"),)
-
+    wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
     wrong_fields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2"),)
     same_values = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
     same_contact = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)

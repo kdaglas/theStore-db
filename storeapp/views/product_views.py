@@ -45,7 +45,7 @@ def add_product():
         else:
             return jsonify({"message":valid}), 400
     except:
-        return jsonify({"Error": "Some fields are missing, please check"}), 400
+        return jsonify({"message": "Some fields are missing, please check"}), 400
 
 
 @app.route('/api/v2/products', methods=['GET'])
