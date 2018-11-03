@@ -71,25 +71,25 @@ class Testing(unittest.TestCase):
 
     def register_attendant(self):
         '''creation of attendant'''
-        obj = Attendant("Douglas", "+256-755-598090", "Callme2", "attendant")
-        obj.add_attendant()
+        registeered = Attendant("Douglas", "+256-755-598090", "Callme2", "attendant")
+        registeered.add_attendant()
 
 
-    def attendant_login(self):
-        response = self.app.post("/api/v2/auth/login",
-            content_type='application/json',
-            data=json.dumps(dict(attendant_name="katod", password="katod"))
+    def attendantlogin(self):
+        resp = self.app.post("/api/v2/auth/login",
+            data=json.dumps(dict(attendant_name="katod", password="katod"),),
+            content_type='application/json'
         )
-        reply = json.loads(response.data)
+        reply = json.loads(resp.data)
         return reply 
 
 
     def adminlogin(self):
-        response = self.app.post("/api/v2/auth/login",
-            content_type='application/json',
-            data=json.dumps(dict(attendant_name="admin", password="admin"))
+        resp = self.app.post("/api/v2/auth/login",
+            data=json.dumps(dict(attendant_name="admin", password="admin"),),
+            content_type='application/json' 
         )
-        reply = json.loads(response.data)
+        reply = json.loads(resp.data)
         return reply 
 
 
