@@ -26,6 +26,7 @@ class Testing(unittest.TestCase):
     wrong_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="mee", category="foodish"),)
     wrong_category = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="12345"),)
 
+
     wrong_fields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2"),)
     same_values = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
     same_contact = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
