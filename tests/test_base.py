@@ -65,8 +65,8 @@ class Testing(unittest.TestCase):
 
     def register_admin(self):
         '''creation of admin or owner'''
-        obj = Attendant("admin", "admin", "admin", "admin")
-        obj.add_attendant()
+        registered = Attendant("admin", "admin", "admin", "admin")
+        registered.add_attendant()
         
 
     def register_attendant(self):
