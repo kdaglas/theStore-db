@@ -3,12 +3,12 @@ from run import app
 from flask import jsonify, json
 
 
-class TestProduct(Testing):
+class TestSale(Testing):
 
     def test_for_invalid_url(self):
         '''testing for invalid url '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/pr",
+        resp = self.app.post("/api/v2/sal",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
                              data=Testing.add_product )
@@ -174,34 +174,6 @@ class TestProduct(Testing):
         self.assertIn(b"Product already exists, just update the quantity", resp.data)
 
 
-    def test_fetching_products(self):
-        '''testing for getting all products '''
-        admin= self.adminlogin()
-        resp1 = self.app.post("/api/v2/products",
-                                content_type='application/json', 
-                                headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product)
-        resp = self.app.get("/api/v2/products",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),)                      
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"All products have been viewed", resp.data)
-
-
-    def test_fetching_one_product(self):
-        '''testing for getting 1 product '''
-        admin= self.adminlogin()
-        resp1 = self.app.post("/api/v2/products",
-                                content_type='application/json', 
-                                headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product)
-        resp = self.app.get("/api/v2/products/1",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),)                      
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"Product has been viewed", resp.data)
-
-
     def test_for_fetching_empty_product_table(self):
         '''test for fetching all products that dont exist'''
         admin = self.adminlogin()
@@ -252,19 +224,6 @@ class TestProduct(Testing):
 
     def test_deleting_product_with_wrong_id(self):
         '''test for deletin with wrong id'''
-        admin= self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                             content_type='application/json', headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)
-        resp2 = self.app.delete("/api/v2/products/1234567890",
-                                 content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),)                 
-        self.assertEqual(resp2.status_code, 404)
-        self.assertIn(b"No products with that id", resp2.data)
-
-
-    def test_deleting_product_with_nothing(self):
-        '''test for deletin with nothing'''
         admin= self.adminlogin()
         resp = self.app.post("/api/v2/products",
                              content_type='application/json', headers=dict(Authorization='Bearer '+admin['token']),

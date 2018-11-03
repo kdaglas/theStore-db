@@ -68,7 +68,7 @@ def add_attendant():
             '''Register the customer'''
             obj = Attendant(attendant_name, contact, password, role)
             result = obj.add_attendant()
-            return jsonify({"message": result}), 200
+            return jsonify({"message": result}), 201
         else:
             return jsonify({"message":valid}), 400
     except:

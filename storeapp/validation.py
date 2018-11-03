@@ -19,10 +19,6 @@ class Validator():
             return "Password is missing"
         elif not re.search(r"^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7}$", password):
             return "Password must have 7 characters with atleast a lowercase, uppercase letter and a number"
-        elif role == '':
-            return "Role is missing"
-        elif not re.search(r"^[a-zA-Z]{5,9}$", role):
-            return "Role must be either admin or attendant"
         else:
             return True
         

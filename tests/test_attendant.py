@@ -3,15 +3,15 @@ from run import app
 from flask import jsonify, json
 
 
-class TestProduct(Testing):
+class TestAttendant(Testing):
 
     def test_for_invalid_url(self):
         '''testing for invalid url '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/pr",
+        resp = self.app.post("/api/v2/auth/sign",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product )
+                             data=Testing.registering_attendant )
         self.assertEqual(resp.status_code, 405)
         self.assertIn(b"Please put a valid URL", resp.data)
 
@@ -19,10 +19,10 @@ class TestProduct(Testing):
     def test_for_method_not_allowed(self):
         ''' test for method not allowed '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products/67878",
+        resp = self.app.post("/api/v2/auth/signup/76446",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product )
+                             data=Testing.registering_attendant )
         self.assertEqual(resp.status_code, 405)
         self.assertIn(b"Method not allowed", resp.data)
 
@@ -30,78 +30,78 @@ class TestProduct(Testing):
     def test_add_product_with_invalid_field(self):
         '''testing for invalid fields '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.wrong_pfields)
+                             data=Testing.wrong_afields)
         self.assertEqual(resp.status_code, 400)
         self.assertIn(b"Some fields are missing, please check", resp.data)
 
 
-    def test_add_product_successful(self):
-        '''testing for successful '''
-        admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product )
-        self.assertEqual(resp.status_code, 201)
-        self.assertIn(b"You have successfully added Cookies", resp.data)
+    # def test_user_reg_successful(self):
+    #     '''testing for successful '''
+    #     admin = self.adminlogin()
+    #     resp = self.app.post("/api/v2/auth/signup",
+    #                          content_type='application/json', 
+    #                          headers=dict(Authorization='Bearer '+admin['token']),
+    #                          data=Testing.registering_attendant )
+    #     self.assertEqual(resp.status_code, 201)
+    #     self.assertIn(b"You have successfully added Douglas", resp.data)
 
     
-    def test_add_product_with_empty_name(self):
-        '''testing for sapace '''
+    def test_add_user_with_empty_name(self):
+        '''testing for space '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_pname)
+                                data=Testing.empty_aname)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Product name is missing", resp.data)
+        self.assertIn(b"Username is missing", resp.data)
 
 
-    def test_add_product_with_empty_price(self):
+    # def test_add_user_with_empty_contact(self):
+    #     '''testing for sapace '''
+    #     admin = self.adminlogin()
+    #     resp = self.app.post("/api/v2/products",
+    #                             content_type='application/json', 
+    #                             headers=dict(Authorization='Bearer '+admin['token']),
+    #                             data=Testing.empty_contact)
+    #     self.assertEqual(resp.status_code, 400)
+    #     self.assertIn(b"Contact is missing", resp.data)
+
+
+    def test_add_product_with_empty_password(self):
         '''testing for sapace '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_price )
+                                data=Testing.empty_password)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Unit_price is missing", resp.data)
+        self.assertIn(b"Password is missing", resp.data)
 
 
-    def test_add_product_with_empty_quabtity(self):
-        '''testing for sapace '''
-        admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                                content_type='application/json', 
-                                headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_quantity )
-        self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Quantity is missing", resp.data)
-
-
-    def test_add_product_with_empty_category(self):
-        '''testing for sapace '''
-        admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                                content_type='application/json', 
-                                headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.empty_category)
-        self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Category is missing", resp.data)
+    # def test_add_product_with_empty_category(self):
+    #     '''testing for sapace '''
+    #     admin = self.adminlogin()
+    #     resp = self.app.post("/api/v2/products",
+    #                             content_type='application/json', 
+    #                             headers=dict(Authorization='Bearer '+admin['token']),
+    #                             data=Testing.empty_category)
+    #     self.assertEqual(resp.status_code, 400)
+    #     self.assertIn(b"Category is missing", resp.data)
 
 
     def test_add_product_with_bad_name(self):
         '''testing for bad name '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.wrong_name)
+                                data=Testing.wrong_anme)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Product name should be one or two words of 5 or more characters each", resp.data)
+        self.assertIn(b"Username should be one or two words of 5 or more characters each", resp.data)
 
 
     # def test_add_product_with_bad_price(self):
