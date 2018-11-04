@@ -13,11 +13,13 @@ class Testing(unittest.TestCase):
     add_product = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="foodish"),)
     create_sales = json.dumps(dict(product_name="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
     registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
+    login_info = json.dumps(dict(attendant_name="Douglas", password="Callme2"),)
 
     ''' data for wrong fields '''
     wrong_afields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2", role="attendant"),)
     wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
     wrong_sfields = json.dumps(dict(product="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
+    login_info_invalid_fields = json.dumps(dict(attendant_name="Douglas", passwod="Callme2"),)
 
     ''' data for attendant '''
     empty_aname = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", role="attendant"),)
@@ -46,22 +48,10 @@ class Testing(unittest.TestCase):
     zero_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="0", category="foodish"),)
 
     ''' data for sales validation '''
-    wrong_fields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2"),)
-    same_values = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
-    same_contact = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
-
-    invalid_customer = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
-    wrong_contact = json.dumps(dict(attendant_name="Douglas", contact="+256755598090", password="Callme2"),)
-    wrong_username = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", category="necessity"),)
-    wrong_password = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", category="necessity"),)
 
 
-    empty_attendant_name = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2"),)
-    empty_contact = json.dumps(dict(attendant_name="Douglas", contact="", password="Callme2"),)
-    empty_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password=""),)
-
-    login_info = json.dumps(dict(attendant_name="Douglas", password="Callme2"),)
-    login_validation = json.dumps(dict(username="******", password="Callme2"))
+    ''' data for login validation '''
+    login_invalid_name = json.dumps(dict(attendant_name="Dougl", password="Callme2"),)
     login_with_empty = json.dumps(dict(username="******", password="Callme2"))
 
 

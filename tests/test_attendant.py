@@ -222,3 +222,23 @@ class TestAttendant(Testing):
                                  data=Testing.login_info)
         self.assertEqual(resp.status_code, 200)
         self.assertIn(b"You have been logged in", resp.data)
+
+
+    # def test_with_invalid_fields_login(self):
+    #     ''' test for invalid fields login '''
+    #     self.register_attendant()
+    #     resp = self.app.post("/api/v2/auth/login",
+    #                             content_type='application/json',
+    #                             data=Testing.login_info_invalid_fields)
+    #     self.assertEqual(resp.status_code, 400)
+    #     self.assertIn(b"Some fields are missing, please check", resp.data)
+
+
+    def test_login_unsuccessful(self):
+        ''' test for wrong name '''
+        self.register_attendant()
+        resp = self.app.post("/api/v2/auth/login",
+                                 content_type='application/json',
+                                 data=Testing.login_invalid_name)
+        self.assertEqual(resp.status_code, 401)
+        self.assertIn(b"Invalid username or password", resp.data)            
