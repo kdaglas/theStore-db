@@ -17,6 +17,14 @@ class UserDatabaseQueries():
         return login
 
 
+    def fetch_all_attendants(self):
+        '''method that retieves all the attendants from the database'''
+        query = """SELECT * FROM attendants"""
+        dbcon.cursor.execute(query)
+        attendants = dbcon.cursor.fetchall()
+        return attendants
+
+
     def get_attendant_by_name(self, attendant_name):
         '''method to return an attendant by name the db'''
         query = """SELECT * FROM attendants WHERE attendant_name = %s"""

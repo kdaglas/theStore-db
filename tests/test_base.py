@@ -19,13 +19,19 @@ class Testing(unittest.TestCase):
     wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
     wrong_sfields = json.dumps(dict(product="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
 
-    '''data for attendant'''
+    ''' data for attendant '''
     empty_aname = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", role="attendant"),)
     empty_contact = json.dumps(dict(attendant_name="Douglas", contact="", password="Callme2", role="attendant"),)
     empty_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="", role="attendant"),)
     wrong_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2456tgfd", role="attendant"),)
     wrong_anme = json.dumps(dict(attendant_name="555", contact="+256-755-598090", password="Callme2", role="attendant"),)
     wrong_contact = json.dumps(dict(attendant_name="Douglas", contact="256755598090", password="Callme2", role="attendant"),)
+
+    dupliate_contact = json.dumps(dict(attendant_name="kakuru", contact="+256-755-598090", password="Callie5", role="attendant"),)
+    dupliate_name = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callie5", role="attendant"),)
+    update_user = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admin"),)
+    update_wrong_role = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admininistrator"),)
+    update_role_wrong_fields = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", roles="admin"),)
 
     ''' data for product validation '''
     empty_pname = json.dumps(dict(product_name="", unit_price="800", quantity="20", category="foodish"),)
@@ -54,7 +60,7 @@ class Testing(unittest.TestCase):
     empty_contact = json.dumps(dict(attendant_name="Douglas", contact="", password="Callme2"),)
     empty_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password=""),)
 
-    login_info = json.dumps(dict(username="Douglas", password="Callme2"))
+    login_info = json.dumps(dict(attendant_name="Douglas", password="Callme2"),)
     login_validation = json.dumps(dict(username="******", password="Callme2"))
     login_with_empty = json.dumps(dict(username="******", password="Callme2"))
 

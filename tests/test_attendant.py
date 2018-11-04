@@ -27,7 +27,7 @@ class TestAttendant(Testing):
         self.assertIn(b"Method not allowed", resp.data)
 
 
-    def test_add_product_with_invalid_field(self):
+    def test_add_user_with_invalid_field(self):
         '''testing for invalid fields '''
         admin = self.adminlogin()
         resp = self.app.post("/api/v2/auth/signup",
@@ -60,18 +60,18 @@ class TestAttendant(Testing):
         self.assertIn(b"Username is missing", resp.data)
 
 
-    # def test_add_user_with_empty_contact(self):
-    #     '''testing for sapace '''
-    #     admin = self.adminlogin()
-    #     resp = self.app.post("/api/v2/products",
-    #                             content_type='application/json', 
-    #                             headers=dict(Authorization='Bearer '+admin['token']),
-    #                             data=Testing.empty_contact)
-    #     self.assertEqual(resp.status_code, 400)
-    #     self.assertIn(b"Contact is missing", resp.data)
+    def test_add_user_with_empty_contact(self):
+        '''testing for sapace '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/auth/signup",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.empty_contact)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Contact is missing", resp.data)
 
 
-    def test_add_product_with_empty_password(self):
+    def test_add_user_with_empty_password(self):
         '''testing for sapace '''
         admin = self.adminlogin()
         resp = self.app.post("/api/v2/auth/signup",
@@ -82,18 +82,7 @@ class TestAttendant(Testing):
         self.assertIn(b"Password is missing", resp.data)
 
 
-    # def test_add_product_with_empty_category(self):
-    #     '''testing for sapace '''
-    #     admin = self.adminlogin()
-    #     resp = self.app.post("/api/v2/products",
-    #                             content_type='application/json', 
-    #                             headers=dict(Authorization='Bearer '+admin['token']),
-    #                             data=Testing.empty_category)
-    #     self.assertEqual(resp.status_code, 400)
-    #     self.assertIn(b"Category is missing", resp.data)
-
-
-    def test_add_product_with_bad_name(self):
+    def test_add_user_with_bad_name(self):
         '''testing for bad name '''
         admin = self.adminlogin()
         resp = self.app.post("/api/v2/auth/signup",
@@ -104,173 +93,132 @@ class TestAttendant(Testing):
         self.assertIn(b"Username should be one or two words of 5 or more characters each", resp.data)
 
 
-    # def test_add_product_with_bad_price(self):
-    #     '''testing for bad price '''
-    #     admin = self.adminlogin()
-    #     resp = self.app.post("/api/v2/products",
-    #                             content_type='application/json', 
-    #                             headers=dict(Authorization='Bearer '+admin['token']),
-    #                             data=Testing.wrong_price)
-    #     self.assertEqual(resp.status_code, 400)
-    #     self.assertIn(b"Unit_price should have no spaces, be 3 or more integers and be in numbers", resp.data)
-
-
-    # def test_add_product_with_bad_quantity(self):
-    #     '''testing for bad quantity '''
-    #     admin = self.adminlogin()
-    #     resp = self.app.post("/api/v2/products",
-    #                             content_type='application/json', 
-    #                             headers=dict(Authorization='Bearer '+admin['token']),
-    #                             data=Testing.wrong_quantity)
-    #     self.assertEqual(resp.status_code, 400)
-    #     self.assertIn(b"Quantity should have no spaces and be in numbers", resp.data)
-
-
-    def test_add_product_with_zero_price(self):
-        '''testing for bzero '''
-        admin= self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                                 content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                 data=Testing.zero_price)   
-        self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Unit_price should be more than 0", resp.data)   
-
-
-    def test_add_product_with_zero_quantiyty(self):
-        '''testing for zero '''
-        admin= self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                                 content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                 data=Testing.zero_quantity)   
-        self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Quantity should be more than 0", resp.data)  
-
-
-    def test_add_product_with_bad_category(self):
-        '''testing for bad category'''
+    def test_add_user_with_bad_cntact(self):
+        '''testing for bad contact '''
         admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.wrong_category)
+                                data=Testing.wrong_contact)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Category should be 5 or more characters and be in characters", resp.data)
+        self.assertIn(b"Contact should be in this format '+256-755-598090'", resp.data)
 
 
-    def test_adding_existing_product(self):
+    # def test_add_user_with_bad_password(self):
+    #     '''testing for bad password '''
+    #     admin = self.adminlogin()
+    #     resp = self.app.post("/api/v2/auth/signup",
+    #                             content_type='application/json', 
+    #                             headers=dict(Authorization='Bearer '+admin['token']),
+    #                             data=Testing.wrong_password)
+    #     self.assertEqual(resp.status_code, 400)
+    #     self.assertIn(b"Password must have 7 characters with atleast a lowercase, uppercase letter and a number", resp.data)
+
+
+    def test_adding_existing_name(self):
         '''testing for duplicate data '''
         admin= self.adminlogin()
-        resp1 = self.app.post("/api/v2/products",
+        resp1 = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product)
-        resp = self.app.post("/api/v2/products",
+                                data=Testing.registering_attendant)
+        resp = self.app.post("/api/v2/auth/signup",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)                      
+                             data=Testing.dupliate_name)                      
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Product already exists, just update the quantity", resp.data)
+        self.assertIn(b"Attendant name already exists, use another", resp.data)
 
 
-    def test_fetching_products(self):
-        '''testing for getting all products '''
+    def test_adding_existing_contact(self):
+        '''testing for duplicate data '''
         admin= self.adminlogin()
-        resp1 = self.app.post("/api/v2/products",
+        resp1 = self.app.post("/api/v2/auth/signup",
                                 content_type='application/json', 
                                 headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product)
-        resp = self.app.get("/api/v2/products",
+                                data=Testing.registering_attendant)
+        resp = self.app.post("/api/v2/auth/signup",
+                             content_type='application/json', 
+                             headers=dict(Authorization='Bearer '+admin['token']),
+                             data=Testing.dupliate_contact)                      
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"Contact already exists, use another", resp.data)
+
+
+    def test_fetching_attendants(self):
+        '''testing for getting all attendants '''
+        admin= self.adminlogin()
+        resp1 = self.app.post("/api/v2/auth/signup",
+                                content_type='application/json', 
+                                headers=dict(Authorization='Bearer '+admin['token']),
+                                data=Testing.registering_attendant)
+        resp = self.app.get("/api/v2/auth/signup",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),)                      
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"All products have been viewed", resp.data)
+        self.assertIn(b"All attendants have been viewed", resp.data)
 
 
-    def test_fetching_one_product(self):
-        '''testing for getting 1 product '''
-        admin= self.adminlogin()
-        resp1 = self.app.post("/api/v2/products",
-                                content_type='application/json', 
-                                headers=dict(Authorization='Bearer '+admin['token']),
-                                data=Testing.add_product)
-        resp = self.app.get("/api/v2/products/1",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),)                      
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"Product has been viewed", resp.data)
+    # def test_for_fetching_empty_attendants_table(self):
+    #     '''test for fetching all attendants that dont exist'''
+    #     admin = self.adminlogin()
+    #     resp = self.app.get("/api/v2/auth/signup",
+    #                          content_type='application/json', 
+    #                          headers=dict(Authorization='Bearer '+admin['token']),)              
+    #     self.assertEqual(resp.status_code, 404)
+    #     self.assertIn(b"No attendants added yet", resp.data)
 
 
-    def test_for_fetching_empty_product_table(self):
-        '''test for fetching all products that dont exist'''
+    def test_updating_attenadant(self):
+        '''test for updating '''
         admin = self.adminlogin()
-        resp = self.app.get("/api/v2/products",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),)              
-        self.assertEqual(resp.status_code, 404)
-        self.assertIn(b"No products added yet", resp.data)
-
-
-    def test_for_fetching_empty_product(self):
-        '''test for fetching an empty that dont exist'''
-        admin = self.adminlogin()
-        resp = self.app.get("/api/v2/products/1",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),)
-        self.assertEqual(resp.status_code, 404)
-        self.assertIn(b"No product with that id", resp.data)
-
-
-    def test_wrong_id(self):
-        '''test for deletin '''
-        admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
+        resp = self.app.post("/api/v2/auth/signup",
                              content_type='application/json', 
                              headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)
-        resp2 = self.app.get("/api/v2/products/a",
+                             data=Testing.registering_attendant)
+        resp2 = self.app.put("/api/v2/auth/signup/1",
                                  content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),)
-        self.assertEqual(resp2.status_code, 400)
-        self.assertIn(b"Id input should be an integer", resp2.data)
-
-
-    def test_deleting_product(self):
-        '''test for deletin '''
-        admin = self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                             content_type='application/json', 
-                             headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)
-        resp2 = self.app.delete("/api/v2/products/1",
-                                 content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),)
+                                 headers=dict(Authorization='Bearer '+admin['token']),
+                                 data=Testing.update_user)
         self.assertEqual(resp2.status_code, 200)
-        self.assertIn(b"Successfully deleted product", resp2.data)
+        self.assertIn(b"Attendant is now admin", resp2.data)
 
 
-    def test_deleting_product_with_wrong_id(self):
-        '''test for deletin with wrong id'''
-        admin= self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                             content_type='application/json', headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)
-        resp2 = self.app.delete("/api/v2/products/1234567890",
+    def test_updating_attenadant_with_wrong_role(self):
+        '''test for updating '''
+        admin = self.adminlogin()
+        resp = self.app.post("/api/v2/auth/signup",
+                             content_type='application/json', 
+                             headers=dict(Authorization='Bearer '+admin['token']),
+                             data=Testing.registering_attendant)
+        resp2 = self.app.put("/api/v2/auth/signup/1",
                                  content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),)                 
-        self.assertEqual(resp2.status_code, 404)
-        self.assertIn(b"No products with that id", resp2.data)
+                                 headers=dict(Authorization='Bearer '+admin['token']),
+                                 data=Testing.update_wrong_role)
+        self.assertEqual(resp2.status_code, 400)
+        self.assertIn(b"Role should either be admin or attendant", resp2.data)
 
 
-    def test_deleting_product_with_nothing(self):
-        '''test for deletin with nothing'''
-        admin= self.adminlogin()
-        resp = self.app.post("/api/v2/products",
-                             content_type='application/json', headers=dict(Authorization='Bearer '+admin['token']),
-                             data=Testing.add_product)
-        resp2 = self.app.delete("/api/v2/products/1234567890",
-                                 content_type='application/json', 
-                                 headers=dict(Authorization='Bearer '+admin['token']),)                 
-        self.assertEqual(resp2.status_code, 404)
-        self.assertIn(b"No products with that id", resp2.data)
+    # def test_updating_attenadant_with_wrong_field(self):
+    #     '''test for updating '''
+    #     admin = self.adminlogin()
+    #     resp = self.app.post("/api/v2/auth/signup",
+    #                          content_type='application/json', 
+    #                          headers=dict(Authorization='Bearer '+admin['token']),
+    #                          data=Testing.registering_attendant)
+    #     resp2 = self.app.put("/api/v2/auth/signup/1",
+    #                              content_type='application/json', 
+    #                              headers=dict(Authorization='Bearer '+admin['token']),
+    #                              data=Testing.update_role_wrong_fields)
+    #     self.assertEqual(resp2.status_code, 400)
+    #     self.assertIn(b"Some fields are missing, please check", resp2.data)
+
+
+    def test_login_successful(self):
+        ''' test for successful login '''
+        self.register_attendant()
+        resp = self.app.post("/api/v2/auth/login",
+                                 content_type='application/json',
+                                 data=Testing.login_info)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b"You have been logged in", resp.data)

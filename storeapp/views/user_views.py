@@ -75,6 +75,23 @@ def add_attendant():
         return jsonify({"Error": "Some fields are missing, please check"}), 400
 
 
+@app.route('/api/v2/auth/signup', methods=['GET'])
+@jwt_required
+def fetch_all_attendants():
+
+    ''' Function that gets all the added attendants through GET method from the database '''
+    user_identity = get_jwt_identity()
+    logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
+    
+    if logged_in['role'] != 'admin':
+        return jsonify({'message': "Unauthorized to operate this feature"})
+    all_attendants = dbquery.fetch_all_attendants()
+    if not all_attendants:
+        return jsonify({"message": "No attendants added yet"}), 404 
+    return jsonify({'All_attendants': all_attendants,
+                    'message': 'All attendants have been viewed'}), 200
+
+
 @app.route("/api/v2/auth/signup/<attendantId>", methods=["PUT"])
 @jwt_required
 def make_attendant_admin(attendantId):
