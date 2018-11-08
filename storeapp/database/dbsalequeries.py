@@ -12,14 +12,13 @@ dbquery = ProductDatabaseQueries()
 
 class SaleDatabaseQueries():
 
-    '''these are methods to perform certain queries to the database'''
+    '''methods to perform certain queries on the db'''
     def create_sales_record(self, productId, quantity, attendant_name):
-        
+        '''logic for creating a sale'''
         existing_product = dbquery.fetch_one_product(productId)
         if not existing_product:
             return False
         if existing_product["quantity"] > int(quantity):
-            print('too much')
             product_name = existing_product["product_name"]
             quantity = int(quantity)
             pay_amount = (existing_product["unit_price"]*int(quantity))
@@ -35,7 +34,7 @@ class SaleDatabaseQueries():
         return False   
 
     def fetch_all_sale_records(self):
-        '''method that retieves all the sale records from the database'''
+        '''fetching all the sale records'''
         query = """SELECT * FROM salerecords"""
         dbcon.cursor.execute(query)
         sale_records = dbcon.cursor.fetchall()
@@ -43,7 +42,7 @@ class SaleDatabaseQueries():
 
 
     def fetch_one_sale_record(self, saleId):
-        '''method that retieves one sale record from the database'''
+        '''getting one record from the database'''
         query = """SELECT * FROM salerecords WHERE saleId = %s"""
         dbcon.cursor.execute(query, (saleId,))
         sale_record = dbcon.cursor.fetchone()
@@ -51,7 +50,7 @@ class SaleDatabaseQueries():
 
 
     def fetch_all_sale_records_by_name(self, attendant_name):
-        '''method that retieves all sale records from the database of one user'''
+        '''retrieving by name'''
         query = """SELECT * FROM salerecords WHERE attendant_name = %s"""
         dbcon.cursor.execute(query, (attendant_name,))
         sale_records = dbcon.cursor.fetchall()
@@ -59,7 +58,7 @@ class SaleDatabaseQueries():
         
 
     def get_records_by_name(self, attendant_name):
-        '''method to return an attendant by name the db'''
+        '''return an attendant by name from the db'''
         query = """SELECT * FROM salerecords WHERE attendant_name = %s"""
         dbcon.cursor.execute(query, (attendant_name,))
         attendant = dbcon.cursor.fetchall()
