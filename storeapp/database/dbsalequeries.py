@@ -16,24 +16,23 @@ class SaleDatabaseQueries():
     def create_sales_record(self, productId, quantity, attendant_name):
         
         existing_product = dbquery.fetch_one_product(productId)
-        if existing_product is None:
+        if not existing_product:
             return False
-        if existing_product["quantity"] < int(quantity):
-            return False
-        product_name = existing_product["product_name"]
-        quantity = int(quantity)
-        pay_amount = (existing_product["unit_price"]*int(quantity))
-        attendant_name = attendant_name
-        new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
-        SaleRecord.create_sale_record(new_sale.product_name,
-                                        new_sale.quantity,
-                                        new_sale.pay_amount, 
-                                        new_sale.attendant_name)
-        new_quantity = int(existing_product["quantity"]) - quantity
-        updated_sale = dbquery.update_one_product(productId, new_quantity)
-        return updated_sale
-            
-
+        if existing_product["quantity"] > int(quantity):
+            print('too much')
+            product_name = existing_product["product_name"]
+            quantity = int(quantity)
+            pay_amount = (existing_product["unit_price"]*int(quantity))
+            attendant_name = attendant_name
+            new_sale = SaleRecord(product_name, quantity, pay_amount, attendant_name)
+            SaleRecord.create_sale_record(new_sale.product_name,
+                                            new_sale.quantity,
+                                            new_sale.pay_amount, 
+                                            new_sale.attendant_name)
+            new_quantity = int(existing_product["quantity"]) - quantity
+            updated_sale = dbquery.update_one_product(productId, new_quantity)
+            return updated_sale
+        return False   
 
     def fetch_all_sale_records(self):
         '''method that retieves all the sale records from the database'''
@@ -58,6 +57,7 @@ class SaleDatabaseQueries():
         sale_records = dbcon.cursor.fetchall()
         return sale_records
         
+
     def get_records_by_name(self, attendant_name):
         '''method to return an attendant by name the db'''
         query = """SELECT * FROM salerecords WHERE attendant_name = %s"""

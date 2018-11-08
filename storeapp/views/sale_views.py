@@ -33,6 +33,8 @@ def create_sale_record():
             if not existing_product:
                 return jsonify({"Product selected doesnot exist, choose another"}), 400
             added_sale = sale_dbquery.create_sales_record(productId, quantity, attendant)
+            if not added_sale:
+                return jsonify({"message": "Quantity being sold is more than quantity in store"}), 200
             return jsonify({"message": "You have created a record"}), 200
         else:
             return jsonify({"message":valid}), 400
