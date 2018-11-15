@@ -5,6 +5,25 @@ from flask import jsonify, json
 
 class TestAttendant(Testing):
 
+    def test_login_unsuccessful(self):
+        ''' test login for wrong credentials '''
+        resp = self.app.post("/api/v2/auth/login",
+                                 content_type='application/json',
+                                 data=Testing.login_invalid_name)
+        self.assertEqual(resp.status_code, 401)
+        self.assertIn(b"Invalid username or password", resp.data) 
+
+
+    def test_login_successful(self):
+        ''' test for successful login '''
+        self.register_attendant()
+        resp = self.app.post("/api/v2/auth/login",
+                                 content_type='application/json',
+                                 data=Testing.login_info)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b"You have been logged in", resp.data)
+
+
     def test_for_invalid_url(self):
         '''testing for invalid url '''
         admin = self.adminlogin()
@@ -57,7 +76,7 @@ class TestAttendant(Testing):
                                 headers=dict(Authorization='Bearer '+admin['token']),
                                 data=Testing.empty_aname)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Username is missing", resp.data)
+        self.assertIn(b"Some values are missing, recheck", resp.data)
 
 
     def test_add_user_with_empty_contact(self):
@@ -68,7 +87,7 @@ class TestAttendant(Testing):
                                 headers=dict(Authorization='Bearer '+admin['token']),
                                 data=Testing.empty_contact)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Contact is missing", resp.data)
+        self.assertIn(b"Some values are missing, recheck", resp.data)
 
 
     def test_add_user_with_empty_password(self):
@@ -79,7 +98,7 @@ class TestAttendant(Testing):
                                 headers=dict(Authorization='Bearer '+admin['token']),
                                 data=Testing.empty_password)
         self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Password is missing", resp.data)
+        self.assertIn(b"Some values are missing, recheck", resp.data)
 
 
     def test_add_user_with_bad_name(self):
@@ -181,7 +200,7 @@ class TestAttendant(Testing):
                                  headers=dict(Authorization='Bearer '+admin['token']),
                                  data=Testing.update_user)
         self.assertEqual(resp2.status_code, 200)
-        self.assertIn(b"Attendant is now admin", resp2.data)
+        self.assertIn(b"Attendant role has been updated", resp2.data)
 
 
     def test_updating_attenadant_with_wrong_role(self):
@@ -214,14 +233,7 @@ class TestAttendant(Testing):
     #     self.assertIn(b"Some fields are missing, please check", resp2.data)
 
 
-    def test_login_successful(self):
-        ''' test for successful login '''
-        self.register_attendant()
-        resp = self.app.post("/api/v2/auth/login",
-                                 content_type='application/json',
-                                 data=Testing.login_info)
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"You have been logged in", resp.data)
+    
 
 
     # def test_with_invalid_fields_login(self):
@@ -234,11 +246,4 @@ class TestAttendant(Testing):
     #     self.assertIn(b"Some fields are missing, please check", resp.data)
 
 
-    def test_login_unsuccessful(self):
-        ''' test for wrong name '''
-        self.register_attendant()
-        resp = self.app.post("/api/v2/auth/login",
-                                 content_type='application/json',
-                                 data=Testing.login_invalid_name)
-        self.assertEqual(resp.status_code, 401)
-        self.assertIn(b"Invalid username or password", resp.data)            
+               
