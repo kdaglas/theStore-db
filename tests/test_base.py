@@ -10,16 +10,22 @@ dbcon = DatabaseConnection()
 class Testing(unittest.TestCase):
 
     ''' data for success '''
+    login_info = json.dumps(dict(attendant_name="admin", password="Admin17"),)
+    registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
     add_product = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="foodish"),)
     create_sales = json.dumps(dict(product_name="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
-    registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
-    login_info = json.dumps(dict(attendant_name="Douglas", password="Callme2"),)
+
+    ''' data for login validation '''
+    login_invalid_name = json.dumps(dict(attendant_name="Chuc", password="Chuck17"),)
+    login_invalid_name = json.dumps(dict(attendant_name="Chuc", password="Chuck17"),)
+    login_with_empty = json.dumps(dict(username="******", password="Callme2"),)
 
     ''' data for wrong fields '''
+    wrong_lfields = json.dumps(dict(attendant="admin", password="Admin17"),)
     wrong_afields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2", role="attendant"),)
     wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
     wrong_sfields = json.dumps(dict(product="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
-    login_info_invalid_fields = json.dumps(dict(attendant_name="Douglas", passwod="Callme2"),)
+    
 
     ''' data for attendant '''
     empty_aname = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", role="attendant"),)
@@ -50,10 +56,6 @@ class Testing(unittest.TestCase):
     ''' data for sales validation '''
 
 
-    ''' data for login validation '''
-    login_invalid_name = json.dumps(dict(attendant_name="Dougl", password="Callme2"),)
-    login_with_empty = json.dumps(dict(username="******", password="Callme2"))
-
 
     def setUp(self):
         '''Declaration of my setup file'''
@@ -70,30 +72,30 @@ class Testing(unittest.TestCase):
 
     def register_admin(self):
         '''creation of admin or owner'''
-        registered = Attendant("admin", "admin", "admin", "admin")
+        registered = Attendant("admin", "+256-700-000000", "Admin17", "admin")
         registered.add_attendant()
         
 
     def register_attendant(self):
         '''creation of attendant'''
-        registeered = Attendant("Douglas", "+256-755-598090", "Callme2", "attendant")
+        registeered = Attendant("chuck", "+256-755-555555", "Chuck17", "attendant")
         registeered.add_attendant()
 
 
     def attendantlogin(self):
         resp = self.app.post("/api/v2/auth/login",
-            data=json.dumps(dict(attendant_name="katod", password="katod"),),
-            content_type='application/json'
-        )
+                             data=json.dumps(dict(attendant_name="Chuck", password="Chuck17"),),
+                             content_type='application/json'
+                            )
         reply = json.loads(resp.data)
         return reply 
 
 
     def adminlogin(self):
         resp = self.app.post("/api/v2/auth/login",
-            data=json.dumps(dict(attendant_name="admin", password="admin"),),
-            content_type='application/json' 
-        )
+                             data=json.dumps(dict(attendant_name="admin", password="Admin17"),),
+                             content_type='application/json' 
+                            )
         reply = json.loads(resp.data)
         return reply 
 
