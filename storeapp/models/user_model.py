@@ -18,7 +18,7 @@ class Attendant():
     
 
     def add_attendant(self):
-        '''method that registers or adds a user to the database'''
+        '''adds a new user to the database'''
         query = """INSERT INTO attendants(attendant_name, contact, password, role) 
                     VALUES (%s, %s, %s, %s)"""      
         dbcon.cursor.execute(query, (self.attendant_name, self.contact, self.password, self.role))
