@@ -7,7 +7,6 @@ import os
 class DatabaseConnection():
 
     def __init__(self):
-
         '''This constructor creates a connection to the database depending on the configuration
             meaning if its a testing environment, then a test database is used where as if its a development
             environment then a development database is created'''
@@ -22,13 +21,11 @@ class DatabaseConnection():
                                                 )
             self.dbconnection.autocommit = True
             self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
-            
         except(Exception, psycopg2.DatabaseError) as e:
             print('Cannot connect to the database {}'.format(e))
 
     
     def create_tables(self):
-
         '''This function creates the tables'''
         try:
             queries = (
@@ -68,7 +65,6 @@ class DatabaseConnection():
 
 
     def delete_tables(self):
-
         '''This function deletes the tables after usage'''
         delete_queries = (
             """DROP TABLE IF EXISTS attendants CASCADE""",
@@ -80,6 +76,5 @@ class DatabaseConnection():
 
 
     def closedb(self):
-
         '''method to close db connection'''
         self.dbconnection.close()
