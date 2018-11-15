@@ -5,18 +5,13 @@ class Validator():
 
     @classmethod
     def validate_store_user_credentials(cls, attendant_name, contact, password, role):
-
         '''method to validate the data of the store user input'''
-        if attendant_name == '':
-            return "Username is missing"
+        if attendant_name == '' or contact == '' or password == '':
+            return "Some values are missing, recheck"
         elif not re.search(r"^([a-zA-Z]{5,}\s)?[a-zA-Z]{5,}$", attendant_name):
             return "Username should be one or two words of 5 or more characters each"
-        elif contact == '':
-            return "Contact is missing"
         elif not re.search(r"^\+256[-]\d{3}[-]\d{6}$", contact):
             return "Contact should be in this format '+256-755-598090'"
-        elif password == '':
-            return "Password is missing"
         elif not re.search(r"^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7}$", password):
             return "Password must have 7 characters with atleast a lowercase, uppercase letter and a number"
         else:
@@ -25,7 +20,6 @@ class Validator():
 
     @classmethod
     def validate_product_inputs(cls, product_name, unit_price, quantity, category):
-
         '''method to validate the data of the product from the store owner input'''
         if product_name == '':
             return "Product name is missing"
