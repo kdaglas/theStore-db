@@ -1,3 +1,4 @@
+'''Packages for the required models'''
 from storeapp.database.dbconnector import DatabaseConnection
 import psycopg2
 import psycopg2.extras as dictionary
@@ -6,7 +7,6 @@ from storeapp import app
 
 dbcon = DatabaseConnection()
 
-'''Object classes for the product model'''
 class Product():
 
     def __init__(self, product_name, unit_price, quantity, category):
@@ -15,7 +15,6 @@ class Product():
         self.unit_price = unit_price
         self.quantity = quantity
         self.category = category
-
 
     def add_product(self):
         '''method that adds a product to the database'''
