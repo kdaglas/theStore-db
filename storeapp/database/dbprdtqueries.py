@@ -18,7 +18,7 @@ class ProductDatabaseQueries():
 
 
     def fetch_all_products(self):
-        '''method that retieves all the product from the database'''
+        '''retieving all the product'''
         query = """SELECT * FROM products"""
         dbcon.cursor.execute(query)
         products = dbcon.cursor.fetchall()
@@ -26,32 +26,24 @@ class ProductDatabaseQueries():
 
 
     def fetch_one_product(self, productId):
-        '''method that retieves one product from the database'''
+        '''get one product from the db'''
         query = """SELECT * FROM products WHERE productId = %s"""
         dbcon.cursor.execute(query, (productId,))
         product = dbcon.cursor.fetchone()
         return product
 
 
+    def update_product(self, unit_price, quantity, productId):
+        '''method that updates price of one product'''
+        query = """UPDATE products SET unit_price = %s, quantity = %s  WHERE productId = %s"""
+        dbcon.cursor.execute(query, (unit_price, quantity, productId,))
+        updated_row = dbcon.cursor.rowcount
+        return updated_row
+
+
     def delete_one_product(self, productId):
-        '''method that deletes one product from the database'''
+        '''deletes one'''
         query = """DELETE FROM products WHERE productId = %s"""
         dbcon.cursor.execute(query, (productId,))
         deleted_row = dbcon.cursor.rowcount
         return deleted_row
-
-
-    def update_one_product(self, quantity, productId):
-        '''method that updatess one product from the database'''
-        query = """UPDATE products SET quantity = %s  WHERE productId = %s"""
-        dbcon.cursor.execute(query, (productId, quantity,))
-        updated_row = dbcon.cursor.rowcount
-        return updated_row
-
-
-    def update_product_price(self, unit_price, productId):
-        '''method that deletes one product from the database'''
-        query = """UPDATE products SET unit_price = %s  WHERE productId = %s"""
-        dbcon.cursor.execute(query, (productId, unit_price,))
-        updated_row = dbcon.cursor.rowcount
-        return updated_row
