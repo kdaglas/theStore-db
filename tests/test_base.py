@@ -11,21 +11,19 @@ class Testing(unittest.TestCase):
 
     ''' data for success '''
     login_info = json.dumps(dict(attendant_name="admin", password="Admin17"),)
-    registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2"),)
+    registering_attendant = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="attendant"),)
     add_product = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="foodish"),)
     create_sales = json.dumps(dict(product_name="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
 
     ''' data for login validation '''
     login_invalid_name = json.dumps(dict(attendant_name="Chuc", password="Chuck17"),)
-    login_invalid_name = json.dumps(dict(attendant_name="Chuc", password="Chuck17"),)
-    login_with_empty = json.dumps(dict(username="******", password="Callme2"),)
 
     ''' data for wrong fields '''
     wrong_lfields = json.dumps(dict(attendant="admin", password="Admin17"),)
     wrong_afields = json.dumps(dict(attendant="Douglas", contact="+256-755-598090", password="Callme2", role="attendant"),)
     wrong_pfields = json.dumps(dict(product="Cookies", unit_price="800", quantity="20", category="foodish"),)
     wrong_sfields = json.dumps(dict(product="Cookies", quantity="20", pay_amount="800", attendant_name="admin"),)
-    
+    wrong_ufields = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", roles="admin"),)
 
     ''' data for attendant '''
     empty_aname = json.dumps(dict(attendant_name="", contact="+256-755-598090", password="Callme2", role="attendant"),)
@@ -34,12 +32,13 @@ class Testing(unittest.TestCase):
     wrong_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2456tgfd", role="attendant"),)
     wrong_anme = json.dumps(dict(attendant_name="555", contact="+256-755-598090", password="Callme2", role="attendant"),)
     wrong_contact = json.dumps(dict(attendant_name="Douglas", contact="256755598090", password="Callme2", role="attendant"),)
+    '''("chuck", "+256-755-555555", "Chuck17", "attendant")'''
+    dupliate_contact = json.dumps(dict(attendant_name="Douglas", contact="+256-755-555555", password="Callie5", role="attendant"),)
+    dupliate_name = json.dumps(dict(attendant_name="chuck", contact="+256-755-598090", password="Callie5", role="attendant"),)
 
-    dupliate_contact = json.dumps(dict(attendant_name="kakuru", contact="+256-755-598090", password="Callie5", role="attendant"),)
-    dupliate_name = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callie5", role="attendant"),)
     update_user = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admin"),)
     update_wrong_role = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admininistrator"),)
-    update_role_wrong_fields = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", roles="admin"),)
+    
 
     ''' data for product validation '''
     empty_pname = json.dumps(dict(product_name="", unit_price="800", quantity="20", category="foodish"),)
@@ -70,12 +69,6 @@ class Testing(unittest.TestCase):
         dbcon.delete_tables()
 
 
-    def register_admin(self):
-        '''creation of admin or owner'''
-        registered = Attendant("admin", "+256-700-000000", "Admin17", "admin")
-        registered.add_attendant()
-        
-
     def register_attendant(self):
         '''creation of attendant'''
         registeered = Attendant("chuck", "+256-755-555555", "Chuck17", "attendant")
@@ -90,6 +83,12 @@ class Testing(unittest.TestCase):
         reply = json.loads(resp.data)
         return reply 
 
+
+    def register_admin(self):
+        '''creation of admin or owner'''
+        registered = Attendant("admin", "+256-700-000000", "Admin17", "admin")
+        registered.add_attendant()
+        
 
     def adminlogin(self):
         resp = self.app.post("/api/v2/auth/login",
