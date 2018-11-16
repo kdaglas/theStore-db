@@ -16,6 +16,24 @@ class Validator():
             return "Password must have 7 characters with atleast a lowercase, uppercase letter and a number"
         else:
             return True
+
+
+    @classmethod
+    def validate_input_type(cls, input):
+        try:
+            _input = int(input)
+        except ValueError:
+            return "Id input should be an integer"
+
+
+    @classmethod
+    def validate_role(cls, role):
+
+        ''' method to validate the data of the product from the store owner input '''
+        if (role != "admin" and role != "attendant"):
+            return "Role should either be admin or attendant"
+        else:
+            return True
         
 
     @classmethod
@@ -43,14 +61,6 @@ class Validator():
             return "Category should be 5 or more characters and be in characters"
         else:
             return True
-
-
-    @classmethod
-    def validate_input_type(cls, input):
-        try:
-            _input = int(input)
-        except ValueError:
-            return "Id input should be an integer"
 
 
     @classmethod
@@ -86,11 +96,4 @@ class Validator():
         else:
             return True
 
-    @classmethod
-    def validate_role(cls, role):
-
-        ''' method to validate the data of the product from the store owner input '''
-        if (role != "admin" and role != "attendant"):
-            return "Role should either be admin or attendant"
-        else:
-            return True
+    
