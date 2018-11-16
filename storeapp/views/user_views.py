@@ -19,8 +19,12 @@ def login():
         then it returns 404 '''
     try:
         reg_info = request.get_json()
-        attendant_name = reg_info.get('attendant_name')
-        password = reg_info.get('password')
+        attendant_name = reg_info.get("attendant_name")
+        password = reg_info.get("password")
+
+        '''checking for right keys in json'''
+        if not reg_info.get("attendant_name") or not reg_info.get("password"):
+            return jsonify({"Error": "Some fields are missing, please check"}), 400
 
         '''checking if the user exists in the db'''
         same_data = dbquery.authenticate_attendant(attendant_name, password)
@@ -54,7 +58,7 @@ def add_attendant():
         user_identity = get_jwt_identity()
         logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
         if logged_in['role'] != 'admin':
-            return jsonify({'message': "Unauthorized to operate this feature"})
+            return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
         '''Validating and checking for correct user data'''
         valid = Validator.validate_store_user_credentials(attendant_name, contact, password, role)
@@ -87,7 +91,7 @@ def fetch_all_attendants():
     user_identity = get_jwt_identity()
     logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
     if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"})
+        return jsonify({'message': "Unauthorized to operate this feature"}), 400
 
     '''getting all users'''
     all_attendants = dbquery.fetch_all_attendants()
@@ -129,7 +133,7 @@ def make_attendant_admin(attendantId):
         attendant with that given attendantId. '''
     try:
         reg_info = request.get_json()
-        role = reg_info.get('role')
+        role = reg_info.get("role")
 
         '''Validating and checking for input type'''
         valid = Validator.validate_input_type(attendantId)
@@ -141,6 +145,10 @@ def make_attendant_admin(attendantId):
         logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
         if logged_in['role'] != 'admin':
             return jsonify({'message': "Unauthorized to operate this feature"})
+
+        '''checking for right keys in json'''
+        if not reg_info.get("role"):
+            return jsonify({"Error": "Some fields are missing, please check"}), 400
 
         '''Validating and checking for correct user data'''
         valid = Validator.validate_role(role)
