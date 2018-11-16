@@ -39,7 +39,6 @@ class Testing(unittest.TestCase):
     update_user = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admin"),)
     update_wrong_role = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2", role="admininistrator"),)
     
-
     ''' data for product validation '''
     empty_pname = json.dumps(dict(product_name="", unit_price="800", quantity="20", category="foodish"),)
     empty_price = json.dumps(dict(product_name="Cookies", unit_price="", quantity="20", category="foodish"),)
@@ -63,17 +62,14 @@ class Testing(unittest.TestCase):
         self.register_admin()
         self.register_attendant()
 
-
     def tearDown(self):
         '''function for deleting the database tables'''
         dbcon.delete_tables()
-
 
     def register_attendant(self):
         '''creation of attendant'''
         registeered = Attendant("chuck", "+256-755-555555", "Chuck17", "attendant")
         registeered.add_attendant()
-
 
     def attendantlogin(self):
         resp = self.app.post("/api/v2/auth/login",
@@ -83,20 +79,18 @@ class Testing(unittest.TestCase):
         reply = json.loads(resp.data)
         return reply 
 
-
     def register_admin(self):
         '''creation of admin or owner'''
         registered = Attendant("admin", "+256-700-000000", "Admin17", "admin")
         registered.add_attendant()
         
-
     def adminlogin(self):
         resp = self.app.post("/api/v2/auth/login",
                              data=json.dumps(dict(attendant_name="admin", password="Admin17"),),
                              content_type='application/json' 
                             )
         reply = json.loads(resp.data)
-        return reply 
+        return reply
 
 
 if __name__ == '__main__':
