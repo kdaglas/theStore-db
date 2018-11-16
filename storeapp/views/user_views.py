@@ -91,7 +91,7 @@ def fetch_all_attendants():
     user_identity = get_jwt_identity()
     logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
     if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"}), 400
+        return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
     '''getting all users'''
     all_attendants = dbquery.fetch_all_attendants()
@@ -116,7 +116,7 @@ def fetch_attendant(attendantId):
     user_identity = get_jwt_identity()
     logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
     if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"})
+        return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
     '''fetching one attendant'''
     attendant = dbquery.fetch_one_attendant(attendantId)
@@ -144,7 +144,7 @@ def make_attendant_admin(attendantId):
         user_identity = get_jwt_identity()
         logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
         if logged_in['role'] != 'admin':
-            return jsonify({'message': "Unauthorized to operate this feature"})
+            return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
         '''checking for right keys in json'''
         if not reg_info.get("role"):
@@ -179,7 +179,7 @@ def delete_attendant(attendantId):
     user_identity = get_jwt_identity()
     logged_in = dbquery.get_attendant_by_name(attendant_name=user_identity)
     if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"})
+        return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
     deleted = dbquery.delete_user(attendantId)
     if not deleted:
