@@ -114,7 +114,7 @@ def update_product(productId):
         updated = productdbquery.update_product(unit_price, quantity, productId)
         if updated:
             return jsonify({'message': 'Product has been updated'}), 200
-        return jsonify({'message': 'Product could not be updated'}), 400
+        return jsonify({'message': 'No product with that id'}), 400
     except:
         return jsonify({"Error": "Some fields are missing, please check"}), 400
 
@@ -140,5 +140,5 @@ def delete_a_product(productId):
     '''delete the product'''
     deleted = productdbquery.delete_one_product(productId)
     if not deleted:
-        return jsonify({"message": "No products with that id"}), 404 
+        return jsonify({"message": "No product with that id"}), 404 
     return jsonify({'message': "Successfully deleted product"}), 200
