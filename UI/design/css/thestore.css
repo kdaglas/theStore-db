@@ -1,0 +1,213 @@
+/*    ----    css for the whole app  ----   */
+@font-face{
+    font-family: myfont;
+    src: url(ABeeZee-Regular.otf);
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family:myfont;
+    color: #211d1e;
+    background-repeat:no-repeat ;
+    background-size: cover;
+    background-attachment: fixed;
+}
+a{
+    text-decoration:none;
+    color:#F9AD20;
+    font-weight: bold;
+    transition: 0.5s;
+}
+a:hover{
+    color:#211d1e;
+    transition: 0.5s;
+}
+
+
+/* ---- css for head of app ----   */
+.head{
+    background-color: #ffffffd3;
+    padding:15px 0 17px 0;
+    margin:0;
+    width: 100%;
+}
+.navigation{
+    width:65%;
+    margin:0 auto;
+    padding:0;
+}
+.main_container{
+    width:70%;
+    margin: 0 auto;
+}
+.middle_section{
+    margin:0 auto;
+    width: 100%;
+}
+
+
+/* ---- navigationbar layout ----   */
+.all_ul{
+    float:right;
+    margin: 0 100px;
+}
+.all_ul li{
+    display:inline-table;
+    list-style-type:none;
+    margin:0;
+}
+.all_ul li a{
+    text-decoration:none;
+    font-size: 15px;
+    color:#1d1d1d;
+    display:block;
+    padding:17px 30px;
+    text-align:center;
+}
+.all_ul li a:hover{
+    color:#fff;
+    color: #F9AD20;
+    transition: 0.5s;
+}
+
+
+/* --- table css --- */
+.table{
+    width: 72%;
+    margin-bottom: 30px;
+    background-color: #ffffffd3;
+}
+.activity h1{
+    text-align: center;
+    font-size: 27px;
+    color: #fff;
+}
+table{
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+table th{
+    padding: 10px 25px;
+    color: #fff;
+    font-size: 17px;
+    background-color: #F9AD20;
+}
+table td{
+    padding: 10px 17px;
+    text-align: center;
+    font-size: 15px;
+}
+table tr:nth-child(odd) td{
+    background-color: #fbf9f966;
+}
+table tr:nth-child(even) td{
+    border-bottom: 1px solid #F9AD20;
+}
+
+
+/* --- heading --- */
+.activity{
+    font-size: 27px;
+    color: #fff;
+    text-align: center;
+}
+
+
+/* --- logout link --- */
+.profile{
+    float:right;
+    font-size:15px;
+}
+
+/* --- all buttons css --- */
+.button{
+    border: 1px solid #F9AD20;
+    background: #F9AD20;
+    border-radius:25px;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 17px;
+    outline: none;
+    transition: 0.5s;
+    box-sizing: border-box;
+}
+.button:hover{
+    background-color: transparent;
+    border: 1px solid #F9AD20;
+    color: #F9AD20;
+    transition: 0.5s;
+}
+.button1{
+    border: 1px solid #0080ff;
+    background: #0080ff;
+    border-radius:25px;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 17px;
+    outline: none;
+    transition: 0.5s;
+    box-sizing: border-box;
+}
+.button1:hover{
+    background-color: transparent;
+    border: 1px solid #0080ff;
+    color: #0080ff;
+    transition: 0.5s;
+}
+.button2{
+    border: 1px solid #c21807;
+    background: #c21807;
+    border-radius:25px;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 17px;
+    outline: none;
+    transition: 0.5s;
+    box-sizing: border-box;
+}
+.button2:hover{
+    background-color: transparent;
+    border: 1px solid #c21807;
+    color: #c21807;
+    transition: 0.5s;
+}
+
+
+/* --- css for some accordian --- */
+.panel {
+    padding: 0;
+    margin: 0 0 0 20px;
+    /* margin: 0; */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.panel p{
+    font-size: 12px;
+}
+.cart{
+    display: none;
+    font-size: 14px;
+}
+.cat_section {
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 5px;
+}
+.cat_section h3 {
+    font-size: 20px;
+    margin: 17px 0;
+}
+.cat-items {
+    font-size: 14px;
+}
+
+
+/* ---- footer layout ----   */
+footer{
+    float: none;
+    clear: both;
+    text-align: center;
+    padding:25px 0 25px 0;
+    background-color: #ffffffd3;
+}

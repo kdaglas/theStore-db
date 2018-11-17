@@ -1,0 +1,71 @@
+/*    ----    css for the background ----   */
+html, body{
+    /* background-image: url(../images/pexels.jpeg); */
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/pexels1.jpeg);
+}
+
+
+/* --- searchbox --- */
+.search{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.search input{
+    padding: 10px 17px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius:25px;
+    font-size: 15px;
+    color: #777;
+    box-sizing: border-box;
+}
+.cat_right{
+    float: right;
+    width: 25%;
+}
+.myshoppingcart {
+    background-color: #fff;
+    padding: 12px 20px 20px 20px;
+    border-radius: 5px;
+}
+.myshoppingcart h3{
+    font-size: 20px;
+    margin:17px 0;
+}
+.table{
+    float: left;
+}
+.cat_section {
+    margin-top: 20px;
+}
+
+
+/* --- modal box to display a single product -- */
+#modalbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    transition: opacity 400ms linear;
+    pointer-events: none;
+}
+#modalbox:target {
+    opacity:1;
+    pointer-events: auto;
+}
+#modalbox > div {
+    width: 400px;
+    text-align: center;
+    height: 470px;
+    position: relative;
+    margin: 50px auto;
+    padding: 20px 20px 13px 20px;
+    border: none;
+    background-color: #fff;
+}
+
+

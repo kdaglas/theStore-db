@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="design/images/favicon.png">
+    <title>Home | theStore</title>
+    <link rel="stylesheet" href="design/css/thestore.css">
+    <link rel="stylesheet" href="design/css/home.css">
+</head>
+<body>
+    <header class="head">
+        <div class="navigation">
+            <a href="homepage.html"><img class="logo" src="design/images/logoo2.png" /></a>
+            <p class="profile">Derrick<br /><a href="index.html">Log out</a></p>
+            <ul class="all_ul">
+                <li><a href="homepage.html">Products</a></li><li>
+                <a href="sales.html">Sales report</a></li><li>
+                <a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="main_container">
+        <div class="middle_section">
+            <div class="cat_right">
+                <div class="search">
+                    <input type="text" name="" placeholder="Search for a product">
+                </div>
+                <div class="myshoppingcart">
+                    <h3><a href="#">Customer's cart</a></h3>
+                    <div class="mycart">
+                        <div id="sugar" class="cart" ><h4>1kg of sugar</h4></div>
+                        <div id="clothes" class="cart" ><h4>1 piece of cloth</h4></div>
+                        <div id="books" class="cart" ><h4>A dozen of books</h4></div>
+                        <div id="soda" class="cart" ><h4>Fanta crate</h4></div>
+                        <div id="vaseline" class="cart" ><h4>1 tube Lotion</h4></div>
+                        <div id="water" class="cart" ><h4>Water</h4></div>
+                        <div id="salt" class="cart" ><h4>1kg of salt</h4></div>
+                    </div>
+                    <a href="sales.html"><button class="button">Add to sale</button></a>
+                </div>
+                <div class="cat_section">
+                    <h3><a href="#">Categories</a></h3>
+                    <h4 class="cat-items">Scholastic.</h4>
+                    <div class="panel">
+                        <p>1. Books.</p>
+                        <p>2. Pens.</p>
+                        <p>3. Papers.</p>
+                        <p>4. Colors.</p>
+                        <p>5. Stencils.</p>
+                    </div>
+                    <h4 class="cat-items">Luxury.</h4>
+                    <div class="panel">
+                        <p>1. Candy.</p>
+                        <p>2. Toys.</p>
+                    </div>
+                    <h4 class="cat-items">Drinks.</h4>
+                    <div class="panel">
+                        <p>1. Juice.</p>
+                        <p>2. Soda.</p>
+                        <p>3. Yorgurt.</p>
+                        <p>4. Water.</p>
+                    </div>
+                    <h4 class="cat-items">Basic.</h4>
+                    <div class="panel">
+                        <p>1. Sugar.</p>
+                        <p>2. Beans.</p>
+                        <p>3. Suits.</p>
+                    </div>
+                    <h4 class="cat-items">Baby.</h4>
+                    <div class="panel">
+                        <p>1. Pampers.</p>
+                        <p>2. Baby vaseline.</p>
+                        <p>3. Suits.</p>
+                    </div>
+                </div>
+            </div>
+            <h1 class="activity">All available products.</h1>
+            <div class="table"> 
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price per unit</th>
+                        <th>Category</th>
+                        <th>Details</th>
+                        <th>Add</th>
+                    </tr>
+                    <tr>
+                        <td>Sugar</td>
+                        <td>20 kg</td>
+                        <td>4,000/=</td>
+                        <td>Basic</td>
+                        <td><a href="#modalbox"><button class="button1">View</button></a></td>
+                        <td><button class="button" onclick="sugar()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Clothes</td>
+                        <td>10 items</td>
+                        <td>10,000/=</td>
+                        <td>Basic</td>
+                        <td><a href="#modalbox"><button class="button1">View</button></a></td>
+                        <td><button class="button" onclick="clothes()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Counter books</td>
+                        <td>60 items</td>
+                        <td>1,000/=</td>
+                        <td>Basic</td>
+                        <td><a href="#modalbox"><button class="button1">View</button></a></td>
+                        <td><button class="button" onclick="books()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Bottled soda</td>
+                        <td>27 crates</td>
+                        <td>12,000/=</td>
+                        <td>Drinks</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="soda()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Lotion</td>
+                        <td>5 cups</td>
+                        <td>4000/=</td>
+                        <td>Luxury</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="vaseline()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Water bottles</td>
+                        <td>70 cartons</td>
+                        <td>1,000/=</td>
+                        <td>Drinks</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="water()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Lingeri</td>
+                        <td>70 items</td>
+                        <td>22,000/=</td>
+                        <td>Luxuary</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="salt()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Salt</td>
+                        <td>2 kgs</td>
+                        <td>4000/=</td>
+                        <td>Basic</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="shoes()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Pampers</td>
+                        <td>70 items</td>
+                        <td>1,000/=</td>
+                        <td>Baby</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="shoes()">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>TV Screens</td>
+                        <td>70 items</td>
+                        <td>1,500,000/=</td>
+                        <td>Basic</td>
+                        <td><button class="button1">View</button></td>
+                        <td><button class="button" onclick="shoes()">Add</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="modalbox">
+                <div class="myshoppingcart">
+                    <h3><a href="#">Product details</a></h3>
+                    <a href="#close"><p>Close modal</p></a>
+                    <div class="mycart">
+                        <h4>Sugar</h4>
+                        <h4>165 Kilograms</h4>
+                        <h4>4,000/= per kilogram</h4>
+                        <h4>Category</h4>
+                        <h5>-- Basic</h5>
+                        <h4>minimum quantity allowed</h4>
+                        <h5>-- 75kg per week</h5>
+                        <div id="salt" class="cart" ><h4>1kg of salt</h4></div>
+                    </div>
+                    <a href="sales.html"><button class="button">Add to sale</button></a>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="design/js/myjava.js"></script>
+    </section>
+    <footer>
+        <p>©2018 <a href="#">theStore</a><br />Designer - Douglas Kato.<br />Project by <a href="#">Andela</a>.</p>
+        <p></p>
+        <p><small><a href="#">Store Manager</a> is a web application that helps store owners <br />manage sales and product inventory records.</small></p>
+    </footer>
+</body>
+</html>

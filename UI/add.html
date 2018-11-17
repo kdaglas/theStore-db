@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="design/images/favicon.png">
+    <title>Add | Admin | theStore</title>
+    <link rel="stylesheet" href="design/css/thestore.css">
+    <link rel="stylesheet" href="design/css/admin.css">
+    <link rel="stylesheet" href="design/css/sales4att.css">
+    <link rel="stylesheet" href="design/css/login.css">
+</head>
+<body>
+    <header class="head">
+        <div class="prof_navigation">
+            <a href="homepage.html"><img src="design/images/logoo2.png" /></a>
+        </div>
+    </header>
+    <section class="main_container">
+        <div class="middle_section">
+            <h1 class="activity">Admin actions.</h1>
+            <div class="tabcontent" id="attendant">
+                <div class="table" id="add_field"> 
+                    <form>
+                        <p>Add a store attendant here...</p>
+                        <div class="input-field">
+                            <input type="text" name="" placeholder="Username" required="">
+                            <input type="text" name="" placeholder="+256-755-598090" required="">
+                            <input type="password" name="" placeholder="Password" required="">
+                            <select name="role">
+                                <option selected>Role</option>
+                                <option value="Scholastic">Administrator</option>
+                                <option value="Luxury">Attendant</option>
+                            </select>
+                            <input type="button" name="" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tabcontent" id="product">
+                <div class="table" id="add_field"> 
+                    <form>
+                        <p>Add the product and all its attributes here...</p>
+                        <div class="input-field">
+                            <input type="text" name="" placeholder="Product name" required="">
+                            <input type="number" name="" placeholder="Quantity" required="">
+                            <input type="number" name="" placeholder="Price" required="">
+                            <select name="category">
+                                <option selected>Category</option>
+                                <option value="Scholastic">Scholastic</option>
+                                <option value="Luxury">Luxury</option>
+                                <option value="Drinks">Drinks</option>
+                                <option value="Basic">Basic</option>
+                                <option value="Baby">Baby</option>
+                            </select>
+                            <input type="button" name="" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tabcontent" id="category">
+                    <div class="table" id="add_field"> 
+                        <form>
+                            <p>Add a category...</p>
+                            <div class="input-field">
+                                <input type="text" name="" placeholder="Category" required="">
+                                <input type="button" name="" value="Add">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <div class="left">
+                <div class="cat_section">
+                    <h3><a href="#">Admin actions</a></h3>
+                    <button class="tablinks" onclick="openAction(event, 'attendant')" id="defaultOpen">Add an attendant.</button>
+                    <button class="tablinks" onclick="openAction(event, 'product')">Add a product.</button>
+                    <button class="tablinks" onclick="openAction(event, 'category')">Add a category.</button>
+                    <!-- <button class="tablinks" onclick="openAction(event, 'Harvy')">Steve Harvy.</button> -->
+                </div>
+                <div class="admin_part">
+                    <div class="credentials">
+                        <h2>Admin</h2>
+                        <a href="index.html"><button>Log out</button></a>
+                    </div>
+                    <ul class="admin_ul">
+                        <li><a href="admin.html">Products</a></li><li>
+                        <a href="sales4att.html">All sales report</a></li><li>
+                        <a href="add.html">Add</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="design/js/myjava.js"></script>
+    </section>
+    <footer>
+        <p>©2018 <a href="#">theStore</a><br />Designer - Douglas Kato.<br />Project by <a href="#">Andela</a>.</p>
+        <p></p>
+        <p><small><a href="#">Store Manager</a> is a web application that helps store owners <br />manage sales and product inventory records.</small></p>
+    </footer>
+</body>
+</html>
