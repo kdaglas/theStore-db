@@ -5,6 +5,10 @@ from flask import jsonify, json
 
 class TestProduct(Testing):
 
+    '''the test on the route
+        so that it is working in
+        accordance to the bneeded way'''
+
     def test_for_invalid_url(self):
         '''testing for invalid url '''
         admin = self.adminlogin()
