@@ -31,8 +31,8 @@ class Testing(unittest.TestCase):
     empty_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="", role="attendant"),)
     wrong_password = json.dumps(dict(attendant_name="Douglas", contact="+256-755-598090", password="Callme2456tgfd", role="attendant"),)
     wrong_anme = json.dumps(dict(attendant_name="555", contact="+256-755-598090", password="Callme2", role="attendant"),)
-    wrong_contact = json.dumps(dict(attendant_name="Douglas", contact="256755598090", password="Callme2", role="attendant"),)
-    '''("chuck", "+256-755-555555", "Chuck17", "attendant")'''
+    wrong_contact = json.dumps(dict(attendant_name="Douglas", contact="256755598090", password="Callme2", role="attendant"),) 
+
     dupliate_contact = json.dumps(dict(attendant_name="Douglas", contact="+256-755-555555", password="Callie5", role="attendant"),)
     dupliate_name = json.dumps(dict(attendant_name="chuck", contact="+256-755-598090", password="Callie5", role="attendant"),)
 
@@ -44,12 +44,22 @@ class Testing(unittest.TestCase):
     empty_price = json.dumps(dict(product_name="Cookies", unit_price="", quantity="20", category="foodish"),)
     empty_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="", category="foodish"),)
     empty_category = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category=""),)
+
     wrong_name = json.dumps(dict(product_name="Cook123", unit_price="800", quantity="20", category="foodish"),)
     wrong_price = json.dumps(dict(product_name="Cookies", unit_price="mee", quantity="20", category="foodish"),)
     wrong_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="mee", category="foodish"),)
     wrong_category = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="20", category="12345"),)
+
     zero_price = json.dumps(dict(product_name="Cookies", unit_price="0", quantity="20", category="foodish"),)
     zero_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="0", category="foodish"),)
+
+    update_product = json.dumps(dict(product_name="Cookies", unit_price="1000", quantity="50", category="foodish"),)
+    update_empty_price = json.dumps(dict(product_name="Cookies", unit_price="", quantity="50", category="foodish"),)
+    update_empty_quantity = json.dumps(dict(product_name="Cookies", unit_price="1000", quantity="", category="foodish"),)
+    update_zero_price = json.dumps(dict(product_name="Cookies", unit_price="0", quantity="50", category="foodish"),)
+    update_zero_quantity = json.dumps(dict(product_name="Cookies", unit_price="1000", quantity="0", category="foodish"),)
+    update_wrong_price = json.dumps(dict(product_name="Cookies", unit_price="mee", quantity="20", category="foodish"),)
+    update_wrong_quantity = json.dumps(dict(product_name="Cookies", unit_price="800", quantity="mee", category="foodish"),)
 
     ''' data for sales validation '''
 

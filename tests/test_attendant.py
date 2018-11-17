@@ -9,22 +9,6 @@ class TestAttendant(Testing):
         so that it is working in
         accordance to the bneeded way'''
 
-    def test_for_login_invalid_url(self):
-        '''testing for invalid url '''
-        resp = self.app.post("/api/v2/auth/log",
-                             content_type='application/json', 
-                             data=Testing.login_info )
-        self.assertEqual(resp.status_code, 405)
-        self.assertIn(b"Please put a valid URL", resp.data)
-
-    def test_for_method_not_allowed(self):
-        ''' test for method not allowed '''
-        resp = self.app.post("/api/v2/auth/signup/76446",
-                             content_type='application/json', 
-                             data=Testing.login_info )
-        self.assertEqual(resp.status_code, 405)
-        self.assertIn(b"Method not allowed", resp.data)
-
     def test_login_wrong_fields(self):
         ''' test login for wrong fields '''
         resp = self.app.post("/api/v2/auth/login",
