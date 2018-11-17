@@ -33,7 +33,7 @@ def login():
 
         '''logging in the user'''
         logged_in = dbquery.get_attendant_by_name(attendant_name)
-        expires = datetime.timedelta(days=1)
+        expires = datetime.timedelta(hours=1)
         access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
         return jsonify({"message": "You have been logged in",
                         "token": access_token}), 200

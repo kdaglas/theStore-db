@@ -89,11 +89,43 @@ def fetch_one_product(productId):
 def update_product(productId):
     ''' updating the quantity
         or price of a product '''
-    # try:
-    pdt_info = request.get_json()
-    unit_price = pdt_info.get("unit_price")
-    quantity = pdt_info.get("quantity")
+    try:
+        pdt_info = request.get_json()
+        unit_price = pdt_info.get("unit_price")
+        quantity = pdt_info.get("quantity")
 
+        '''Validating and checking for input type'''
+        valid = Validator.validate_input_type(productId)
+        if valid:
+            return jsonify({"message":valid}), 400
+
+        '''checking for user permissions'''
+        user_identity = get_jwt_identity()
+        logged_in = userdbquery.get_attendant_by_name(attendant_name=user_identity)
+        if logged_in['role'] != 'admin':
+            return jsonify({'message': "Unauthorized to operate this feature"}), 401
+
+        '''Validating and checking for correct user data'''
+        valid = Validator.validate_update_input(unit_price, quantity)
+        if valid != True:
+            return jsonify({"message":valid}), 400
+
+        '''update the product'''
+        updated = productdbquery.update_product(unit_price, quantity, productId)
+        if updated:
+            return jsonify({'message': 'Product has been updated'}), 200
+        return jsonify({'message': 'Product could not be updated'}), 400
+    except:
+        return jsonify({"Error": "Some fields are missing, please check"}), 400
+
+
+@app.route('/api/v2/products/<productId>', methods=['DELETE'])
+@jwt_required
+def delete_a_product(productId):
+    ''' This is to delete an added
+        product through DELETE method 
+        from the database '''
+    
     '''Validating and checking for input type'''
     valid = Validator.validate_input_type(productId)
     if valid:
@@ -105,38 +137,8 @@ def update_product(productId):
     if logged_in['role'] != 'admin':
         return jsonify({'message': "Unauthorized to operate this feature"}), 401
 
-    '''Validating and checking for correct user data'''
-    valid = Validator.validate_update_input(unit_price, quantity)
-    if valid != True:
-        return jsonify({"message":valid}), 400
-
-    '''update the product'''
-    updated = productdbquery.update_product(unit_price, quantity, productId)
-    if updated:
-        return jsonify({'message': 'Product has been updated'}), 200
-    return jsonify({'message': 'Product could not be updated'}), 400
-    # except:
-    #     return jsonify({"Error": "Some fields are missing, please check"}), 400
-
-
-@app.route('/api/v2/products/<productId>', methods=['DELETE'])
-@jwt_required
-def delete_a_product(productId):
-
-    ''' Function that deletes an added product through DELETE method from the database '''
-    valid = Validator.validate_input_type(productId)
-
-    if valid:
-        return jsonify({"message":valid}), 400
-    user_identity = get_jwt_identity()
-    logged_in = userdbquery.get_attendant_by_name(attendant_name=user_identity)
-    
-    if logged_in['role'] != 'admin':
-        return jsonify({'message': "Unauthorized to operate this feature"})
+    '''delete the product'''
     deleted = productdbquery.delete_one_product(productId)
     if not deleted:
         return jsonify({"message": "No products with that id"}), 404 
     return jsonify({'message': "Successfully deleted product"}), 200
-
-
-
