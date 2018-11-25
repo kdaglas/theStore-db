@@ -8,7 +8,7 @@
     <title>Login | theStore</title>
     <link rel="stylesheet" href="design/css/login.css">
     <link rel="stylesheet" href="design/css/thestore.css">
-    <script type="text/javascript" src="design/js/authent.js"></script>
+    <link rel="stylesheet" href="design/css/queries.css">
 </head>
 <body>
     <section id="contain">
@@ -22,17 +22,18 @@
                     <p>Welcome back<br/>
                     Login to resume your sales.</p>
                 </div>
-                <form>
+                <form method ="POST" id="log">
                     <div class="input-field">
                         <input type="text" name="" id="username" placeholder="Username" required="">
                         <input type="password" id="password" name="" placeholder="Password" required="">
-                        <input type="button" name="" value="Log In" onclick="Check()">
+                        <input type="submit" name="" value="Log In">
                     </div>
                     <p></p>
-                    <p><small><a href="#">Forgot your password?</a></small></p>
+                    <p class="error-message" id="errormsg"></p>
                 </form>
             </div>
         </div>
     </section>
+    <script type="text/javascript" src="design/js/fetchjs/login.js"></script>
 </body>
 </html>

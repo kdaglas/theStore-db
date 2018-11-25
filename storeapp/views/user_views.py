@@ -25,7 +25,7 @@ def login():
         '''checking for right keys in json'''
         if not reg_info.get("attendant_name") or not reg_info.get("password"):
             return jsonify({"Error": "Some fields are missing, please check"}), 400
-
+        
         '''checking if the user exists in the db'''
         same_data = dbquery.authenticate_attendant(attendant_name, password)
         if not same_data:
@@ -33,10 +33,15 @@ def login():
 
         '''logging in the user'''
         logged_in = dbquery.get_attendant_by_name(attendant_name)
+        attendant = logged_in['attendant_name']
+        role = logged_in['role']
         expires = datetime.timedelta(hours=1)
         access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
-        return jsonify({"message": "You have been logged in",
-                        "token": access_token}), 200
+
+        return jsonify({"themessage": "You have been logged in",
+                        "User_logged_in": attendant,
+                        "token": access_token,
+                        "role": role}), 200
     except:
         return jsonify({"Error": "Some fields are missing, please check"}), 400
 

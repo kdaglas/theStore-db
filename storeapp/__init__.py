@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 import datetime
 from flask import jsonify
 
 
 app = Flask(__name__)
+CORS(app)
 app.config['JWT_SECRET_KEY'] = 'my-secret'
 app.config['JWT_ACCESS_TOKEN EXPIRES'] = datetime.timedelta(days=1)
 jwt = JWTManager(app)
