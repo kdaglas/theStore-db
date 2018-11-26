@@ -1,0 +1,121 @@
+/*    ----    css for the background ----   */
+html, body{
+    background-image: url(../images/white.jpeg);
+    /* background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/white.jpeg); */
+}
+
+
+/* ---- css for the head of the profile website ---- */
+.prof_navigation{
+    width:11%;
+    margin:0 auto;
+    padding:0;
+}
+
+
+/* ---- navigationbar layout ----  */
+.admin_ul{
+    padding: 15px 0 15px 0;
+    background-color: #ffffffd3;
+    border-radius: 5px;
+    margin: 0;
+}
+.admin_ul li{
+    display: block;
+    list-style-type: none;
+    margin: 0;
+}
+.admin_ul li a{
+    text-decoration:none;
+    font-size: 15px;
+    color:#211d1e;
+    display: block;
+    padding: 20px 50px;
+    text-align:center;
+}
+.admin_ul li a:hover{
+    color:#fff;
+    background-color: #F9AD20;
+    transition: 0.5s;
+}
+
+
+/* ---- layout css for the profile page ----   */
+.left{
+    float: left;
+    width: 25%;
+    /* background-color: #ffffffd3; */
+}
+.admin_part{
+    text-align: center;
+    padding: 0;
+    margin-top: 0;
+    color: #fff;
+}
+.credentials{
+    background-color: #F9AD20;
+    padding: 15px 0 35px 0;
+    margin: 15px 0 15px 0;
+}
+.credentials h2{
+    font-size: 37px;
+}
+.credentials p{
+    font-size: 14px;
+}
+.credentials button{
+    border: 1px solid #211d1e;
+    background: #211d1e;
+    border-radius:25px;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 17px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.credentials button:hover{
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    transition: 0.5s;
+}
+.table{
+    float: right;
+}
+
+.cat_section {
+    margin-bottom: 20px;
+}
+.activity{
+    color: #211d1e;
+}
+
+
+/* --- modal box to display a single product -- */
+#modalbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    transition: opacity 400ms linear;
+    pointer-events: none;
+}
+#modalbox:target {
+    opacity:1;
+    pointer-events: auto;
+}
+#modalbox > div {
+    width: 400px;
+    text-align: center;
+    height: 470px;
+    position: relative;
+    margin: 50px auto;
+    padding: 20px 20px 13px 20px;
+    border: none;
+    background-color: #fff;
+}
+

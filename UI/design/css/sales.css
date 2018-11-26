@@ -1,0 +1,8 @@
+/*    ----    css for the background ----   */
+html, body{
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/pexels1.jpeg);
+}
+
+.table{
+    width:100%;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="design/images/favicon.png">
+    <title>Sales | Admin | theStore</title>
+    <link rel="stylesheet" href="design/css/thestore.css">
+    <link rel="stylesheet" href="design/css/admin.css">
+    <link rel="stylesheet" href="design/css/sales4att.css">
+</head>
+<body>
+    <header class="head">
+        <div class="prof_navigation">
+            <a href="homepage.html"><img src="design/images/logoo2.png" /></a>
+        </div>
+    </header>
+    <section class="main_container">
+        <div class="middle_section">
+            <h1 class="activity">All sales per attendant.</h1>
+            <div class="tabcontent" id="Derrick">
+                <div class="table"  > 
+                    <table>
+                        <tr>
+                            <th>Total number of sales</th>
+                            <th>Total number of products sold</th>
+                            <th>Total worth of products sold</th>
+                        </tr>
+                        <tr>
+                            <td>4kg of sugar<br/>18 sponges<br/>20 toothbrushes<br/>21 shirts<br/>5 panties<br/>16 pairs of candy<br/>5 vests<br/>2 bottles of soda<br/>1kg of beans<br/>4kg of sugar<br/>18 sponges<br/>20 toothbrushes<br/>12 rolls of TPs<br/>3 paste<br/>1 tin of zesta<br/>1 bar of soap</td>
+                            <td>146 items</td>
+                            <td>1,320,000/=</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tabcontent" id="Sarah">
+                <div class="table"  > 
+                    <table>
+                        <tr>
+                            <th>Total number of sales</th>
+                            <th>Total number of products sold</th>
+                            <th>Total worth of products sold</th>
+                        </tr>
+                        <tr>
+                            <td>16kg of salt<br/>18 pampers<br/>10 toiletpapers<br/>24 sweets<br/>62 pegs<br/>16 pairs of trousers<br/>51 undershirts<br/>2 bottles of soda<br/>1kg of beans<br/>50kg of rice</td>
+                            <td>250 items</td>
+                            <td>2,320,000/=</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tabcontent" id="Greg">
+                <div class="table"  > 
+                    <table>
+                        <tr>
+                            <th>Total number of sales</th>
+                            <th>Total number of products sold</th>
+                            <th>Total worth of products sold</th>
+                        </tr>
+                        <tr>
+                            <td>16kg of salt<br/><br/>62 pegs<br/>16 pairs of trousers<br/>51 undershirts<br/>2 bottles of soda<br/>1kg of beans<br/>50kg of rice<br/>2 bottles of soda<br/>1kg of beans<br/>4kg of sugar<br/>18 sponges<br/>18 pampers<br/>10 toiletpapers<br/>24 sweets</td>
+                            <td>220 items</td>
+                            <td>720,000/=</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tabcontent" id="Harvy">
+                <div class="table"  > 
+                    <table>
+                        <tr>
+                            <th>Total number of sales</th>
+                            <th>Total number of products sold</th>
+                            <th>Total worth of products sold</th>
+                        </tr>
+                        <tr>
+                            <td>93kg of beans<br/><br/>2 polaties<br/>3 pairs of skirts<br/>2 underpants</td>
+                            <td>100 items</td>
+                            <td>720,000/=</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="left">
+                <div class="cat_section">
+                    <h3><a href="#">Store attendants</a></h3>
+                    <button class="tablinks" onclick="openAttendant(event, 'Derrick')" id="defaultOpen">Derrick Luthor.</button>
+                    <button class="tablinks" onclick="openAttendant(event, 'Sarah')">Sarah Baker.</button>
+                    <button class="tablinks" onclick="openAttendant(event, 'Greg')">Marvin Greg.</button>
+                    <button class="tablinks" onclick="openAttendant(event, 'Harvy')">Steve Harvy.</button>
+                </div>
+                <div class="admin_part">
+                    <div class="credentials">
+                        <h2>Admin</h2>
+                        <a href="index.html"><button>Log out</button></a>
+                    </div>
+                    <ul class="admin_ul">
+                        <li><a href="admin.html">Products</a></li><li>
+                        <a href="sales4att.html">All sales report</a></li><li>
+                        <a href="add.html">Add</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="design/js/myjava.js"></script>
+    </section>
+    <footer>
+        <p>©2018 <a href="#">theStore</a><br />Designer - Douglas Kato.<br />Project by <a href="#">Andela</a>.</p>
+        <p></p>
+        <p><small><a href="#">Store Manager</a> is a web application that helps store owners <br />manage sales and product inventory records.</small></p>
+    </footer>
+</body>
+</html>

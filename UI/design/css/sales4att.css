@@ -1,0 +1,29 @@
+/* --- css for the tabs ---*/
+.cat_section button {
+    display: block;
+    padding: 15px 20px;
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+.cat_section button:hover {
+    background-color: #ddd;
+    border-radius: 20px;
+}
+.cat_section button.active {
+    background-color: #F9AD20;
+    border-radius: 20px;
+}
+#add_field{
+    height: 500px;
+    background-color: #ffffffd3;
+    padding-top: 77px;
+    font-size: 27px;
+    text-align: center;
+    color: #F9AD20;
+}

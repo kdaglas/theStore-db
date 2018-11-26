@@ -1,0 +1,76 @@
+/*    ----    css for the background ----   */
+html, body{
+    background-image: url(../images/white.jpeg);
+}
+
+
+/*    ----   layout css for login page  ----   */
+.login_box{
+    margin: 110px auto;
+    width:57%;
+    height: 420px;
+    text-align: center;
+    background-color: #ffffffd3;
+    box-shadow: 0 7px 50px rgba(0,0,0,.3);
+}
+.desscription{
+    float: left;
+    margin: -55px 0 0 45px;
+}
+.heading p{
+    color: #211d1e;
+    font-size: 18px;
+}
+.fillups{
+    float: right;
+    padding: 15px;
+    margin: 7px 45px 0 0;
+}
+
+
+/*    ----    css form  ----   */
+form{
+    width: 250px;
+    margin: 20px auto;
+}
+form .input-field input,
+form .input-field select{
+    margin: 15px 0 0 0;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    color: #777;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+form .input-field input:focus,
+form .input-field input:valid,
+form .input-field select:focus {
+    border-bottom: 1px solid #F9AD20;
+    transition: 0.5s;
+}
+form .input-field input[type="button"] {
+    border: 1px solid #F9AD20;
+    font-weight: bold;
+    background-color: #F9AD20;
+    border-radius:25px;
+    color: #fff;
+    width: 120px;
+    transition: 0.5s;
+}
+form .input-field input[type="button"]:hover {
+    background-color: transparent;
+    border: 1px solid #F9AD20;
+    color: #F9AD20;
+    transition: 0.5s;
+}
+form .input-field select option{
+    padding: 20px;
+    background-color: #fff;
+    color: #F9AD20;
+    border: none;
+    outline: none;
+}
