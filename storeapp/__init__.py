@@ -8,7 +8,7 @@ from flask import jsonify
 app = Flask(__name__)
 CORS(app)
 app.config['JWT_SECRET_KEY'] = 'my-secret'
-app.config['JWT_ACCESS_TOKEN EXPIRES'] = datetime.timedelta(days=1)
+app.config['JWT_ACCESS_TOKEN EXPIRES'] = datetime.timedelta(hours=1)
 jwt = JWTManager(app)
 
 
