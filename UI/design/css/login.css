@@ -52,7 +52,7 @@ form .input-field select:focus {
     border-bottom: 1px solid #F9AD20;
     transition: 0.5s;
 }
-form .input-field input[type="button"] {
+form .input-field input[type="submit"] {
     border: 1px solid #F9AD20;
     font-weight: bold;
     background-color: #F9AD20;
@@ -61,7 +61,7 @@ form .input-field input[type="button"] {
     width: 120px;
     transition: 0.5s;
 }
-form .input-field input[type="button"]:hover {
+form .input-field input[type="submit"]:hover {
     background-color: transparent;
     border: 1px solid #F9AD20;
     color: #F9AD20;
