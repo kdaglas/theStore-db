@@ -22,7 +22,16 @@ a:hover{
     color:#211d1e;
     transition: 0.5s;
 }
-
+.error-message{
+    font-size: 13px;
+    color: red;
+    text-align: center;
+}
+.success-message{
+    font-size: 13px;
+    color: green;
+    text-align: center;
+}
 
 /* ---- css for head of app ----   */
 .head{
@@ -97,10 +106,10 @@ table td{
     text-align: center;
     font-size: 15px;
 }
-table tr:nth-child(odd) td{
+table tr:nth-child(even) td{
     background-color: #fbf9f966;
 }
-table tr:nth-child(even) td{
+table tr:nth-child(odd) td{
     border-bottom: 1px solid #F9AD20;
 }
 
@@ -200,6 +209,72 @@ table tr:nth-child(even) td{
 }
 .cat-items {
     font-size: 14px;
+}
+
+/* --- modal box to display a single product -- */
+#modalbox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    transition: opacity 400ms linear;
+    pointer-events: none;
+}
+#modalbox:target {
+    opacity:1;
+    pointer-events: auto;
+}
+#modalbox > div {
+    width: 370px;
+    text-align: center;
+    height: 470px;
+    position: relative;
+    margin: 70px auto;
+    padding: 0 0 13px 0;
+    border: none;
+    background-color: #fff;
+}
+
+.myshoppingcart {
+    background-color: #fff;
+    padding: 12px 20px 20px 20px;
+    border-radius: 5px;
+}
+.myshoppingcart h3{
+    font-size: 20px;
+    margin:17px 0;
+}
+.product-head{
+    background: #F9AD20;
+    width: 100%;
+    padding: 5px 0 20px 0;
+    height: 100px;
+}
+.product-head h3{
+    font-size: 20px;
+    color: #fff;
+}
+
+.product-head button{
+    border: 1px solid #211d1e;
+    margin:0;
+    background: #211d1e;
+    border-radius:25px;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 17px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.product-head button:hover{
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    transition: 0.5s;
 }
 
 
