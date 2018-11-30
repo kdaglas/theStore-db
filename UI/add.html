@@ -22,61 +22,61 @@
             <h1 class="activity">Admin actions.</h1>
             <div class="tabcontent" id="attendant">
                 <div class="table" id="add_field"> 
-                    <form>
+                    <form method ="POST" id="signing-up">
                         <p>Add a store attendant here...</p>
                         <div class="input-field">
-                            <input type="text" name="" placeholder="Username" required="">
-                            <input type="text" name="" placeholder="+256-755-598090" required="">
-                            <input type="password" name="" placeholder="Password" required="">
-                            <select name="role">
-                                <option selected>Role</option>
-                                <option value="Scholastic">Administrator</option>
-                                <option value="Luxury">Attendant</option>
-                            </select>
-                            <input type="button" name="" value="Add">
+                            <input type="text" id="username" name="" placeholder="Username" required="">
+                            <input type="text" id="contact" name="" placeholder="+256-755-598090" required="">
+                            <input type="password" id="password" name="" placeholder="Password" required="">
+                            <input type="submit" name="" value="Add">
+                            <p></p>
+                            <p class="error-message" id="errormsg"></p>
+                            <p class="success-message" id="successmsg"></p>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="tabcontent" id="product">
                 <div class="table" id="add_field"> 
-                    <form>
-                        <p>Add the product and all its attributes here...</p>
+                    <form method ="POST" id="adding">
+                        <p>Add the product here...</p>
                         <div class="input-field">
-                            <input type="text" name="" placeholder="Product name" required="">
-                            <input type="number" name="" placeholder="Quantity" required="">
-                            <input type="number" name="" placeholder="Price" required="">
-                            <select name="category">
+                            <input type="text" name="" id="product_name" placeholder="Product name" required="">
+                            <input type="number" name="" id="unit_price" placeholder="Price" required="">
+                            <input type="number" name="" id="quantity" placeholder="Quantity" required="">
+                            <select name="category" id="categories">
                                 <option selected>Category</option>
-                                <option value="Scholastic">Scholastic</option>
+                                <option value="Scholastic">School</option>
                                 <option value="Luxury">Luxury</option>
                                 <option value="Drinks">Drinks</option>
                                 <option value="Basic">Basic</option>
-                                <option value="Baby">Baby</option>
+                                <option value="Baby">Food</option>
                             </select>
-                            <input type="button" name="" value="Add">
+                            <input type="submit" name="" value="Add">
+                            <p></p>
+                            <p class="error-message" id="error-message"></p>
+                            <p class="success-message" id="success-message"></p>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="tabcontent" id="category">
-                    <div class="table" id="add_field"> 
-                        <form>
-                            <p>Add a category...</p>
-                            <div class="input-field">
-                                <input type="text" name="" placeholder="Category" required="">
-                                <input type="button" name="" value="Add">
-                            </div>
-                        </form>
-                    </div>
+                <div class="table" id="add_field"> 
+                    <form>
+                        <p>Add a category...</p>
+                        <div class="input-field">
+                            <input type="text" name="" placeholder="Category" required="">
+                            <input type="submit" name="" value="Add">
+                        </div>
+                    </form>
                 </div>
+            </div>
             <div class="left">
                 <div class="cat_section">
                     <h3><a href="#">Admin actions</a></h3>
                     <button class="tablinks" onclick="openAction(event, 'attendant')" id="defaultOpen">Add an attendant.</button>
                     <button class="tablinks" onclick="openAction(event, 'product')">Add a product.</button>
                     <button class="tablinks" onclick="openAction(event, 'category')">Add a category.</button>
-                    <!-- <button class="tablinks" onclick="openAction(event, 'Harvy')">Steve Harvy.</button> -->
                 </div>
                 <div class="admin_part">
                     <div class="credentials">
@@ -92,6 +92,9 @@
             </div>
         </div>
         <script type="text/javascript" src="design/js/myjava.js"></script>
+        <script type="text/javascript" src="design/js/add_page.js"></script>
+        <script type="text/javascript" src="design/js/fetchjs/add_attendant.js"></script>
+        <script type="text/javascript" src="design/js/fetchjs/add_product.js"></script>
     </section>
     <footer>
         <p>©2018 <a href="#">theStore</a><br />Designer - Douglas Kato.<br />Project by <a href="#">Andela</a>.</p>
