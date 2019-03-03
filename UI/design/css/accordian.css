@@ -1,0 +1,90 @@
+/*---   css for the comment box   ---*/
+.but{
+    border: none;
+    cursor: pointer;
+    background: #7f2aff;
+    border-radius:25px;
+    color: #fff;
+    margin:20px;
+    font-size: 12px;
+    padding: 12px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.active, .but:hover {
+    background-color: #1d1d1d;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.forme{
+    width: 100%;
+    margin: 47px auto 25px;
+}
+.forme .input-box {
+    margin: 20px 0;
+}
+.forme .input-box input {
+    width: 100%;
+    font-size: 17px;
+    padding: 12px;
+    color: #777;
+    border: 1px solid #ccc;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.forme .input-box input:focus,
+.forme .input-box input:valid {
+    border-bottom: 0.5px solid #7f2aff;
+    transition: 0.5s;
+}
+.forme .input-box input[type="submit"] {
+    border: none;
+    background: #7f2aff;
+    border-radius:25px;
+    width:20%;
+    color: #fff;
+    font-weight: bold;
+}
+.forme .input-box input[type="submit"]:hover {
+    background: #1d1d1d;
+    transition: 0.5s;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font: normal 13px sans-serif;
+}
+
+.comment-section{
+    list-style: none;
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 10px;
+}
+
+.comments{
+    border:1px  solid #e3e3e3;
+    
+}
+.comment-img{
+    border-radius: 50%;
+}
+
+.avatar{
+    height: 50px;
+    width: 50px;
+}
