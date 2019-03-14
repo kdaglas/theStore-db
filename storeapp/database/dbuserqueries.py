@@ -12,10 +12,10 @@ class UserDatabaseQueries():
     '''performing certain queries to the database'''
     def add_admin(self):
         '''registers an admin'''
-        # query = """INSERT INTO attendants(attendant_name, contact, password, role) 
-        #             VALUES (%s, %s, %s, %s)"""      
-        # dbcon.cursor.execute(query, ('admin', '+256-700-000000', 'Admin17', 'admin'))
-        pass
+        query = """INSERT INTO attendants(attendant_name, contact, password, role) 
+                    VALUES (%s, %s, %s, %s)"""      
+        dbcon.cursor.execute(query, ('admin', '+256-700-000000', 'Admin17', 'admin'))
+        # pass
 
 
     def authenticate_attendant(self, attendant_name, password):
