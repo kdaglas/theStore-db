@@ -17,33 +17,33 @@ def login():
     ''' login the user(attendant)
         and if that user doesnot exist,
         then it returns 404 '''
-    try:
-        reg_info = request.get_json()
-        attendant_name = reg_info.get("attendant_name")
-        password = reg_info.get("password")
+    # try:
+    reg_info = request.get_json()
+    attendant_name = reg_info.get("attendant_name")
+    password = reg_info.get("password")
 
-        '''checking for right keys in json'''
-        if not reg_info.get("attendant_name") or not reg_info.get("password"):
-            return jsonify({"Error": "Some fields are missing, please check"}), 400
-        
-        '''checking if the user exists in the db'''
-        same_data = dbquery.authenticate_attendant(attendant_name, password)
-        if not same_data:
-            return jsonify({"message": "Invalid username or password"}), 401
+    '''checking for right keys in json'''
+    if not reg_info.get("attendant_name") or not reg_info.get("password"):
+        return jsonify({"Error": "Some key fields are missing, please check"}), 400
+    
+    '''checking if the user exists in the db'''
+    same_data = dbquery.authenticate_attendant(attendant_name, password)
+    if not same_data:
+        return jsonify({"message": "Invalid username or password"}), 401
 
-        '''logging in the user'''
-        logged_in = dbquery.get_attendant_by_name(attendant_name)
-        attendant = logged_in['attendant_name']
-        role = logged_in['role']
-        expires = datetime.timedelta(hours=1)
-        access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
+    '''logging in the user'''
+    logged_in = dbquery.get_attendant_by_name(attendant_name)
+    attendant = logged_in['attendant_name']
+    role = logged_in['role']
+    expires = datetime.timedelta(hours=1)
+    access_token = create_access_token(identity=logged_in['attendant_name'], expires_delta=expires)
 
-        return jsonify({"themessage": "You have been logged in",
-                        "User_logged_in": attendant,
-                        "token": access_token,
-                        "role": role}), 200
-    except:
-        return jsonify({"Error": "Some fields are missing, please check"}), 400
+    return jsonify({"themessage": "You have been logged in",
+                    "User_logged_in": attendant,
+                    "token": access_token,
+                    "role": role}), 200
+    # except:
+    #     return jsonify({"Error": "Some fields are missing, please check"}), 400
 
 
 @app.route("/api/v2/auth/signup", methods=['POST'])
