@@ -13,14 +13,34 @@ class DatabaseConnection():
         try:
             if os.getenv('APP_SETTINGS') == "testing":
                 databasename = 'testdatabase'
+                user = 'postgres'
+                password = 'admin'
+                host = 'localhost'
             else:
-                databasename = 'thestoredb'
-            self.dbconnection = psycopg2.connect(database=databasename, user="postgres",
-                                                password="admin", host="localhost",
+                # databasename = 'thestoredb'
+                # user = 'postgres'
+                # password = 'admin'
+                # host = 'localhost'
+                databasename = 'd7gvg3da3mefg9'
+                user = 'uxduccjuifcnng'
+                password = 'f3569e7d3c9c85212475fc95faa5ad24bee04501290a1ba8413075435a5ea878'
+                host = 'ec2-75-101-133-29.compute-1.amazonaws.com'
+                
+            self.dbconnection = psycopg2.connect(database=databasename,
+                                                user=user,
+                                                password=password,
+                                                host=host,
                                                 port="5432"
                                                 )
+
             self.dbconnection.autocommit = True
             self.cursor = self.dbconnection.cursor(cursor_factory = dictionary.RealDictCursor)
+            # self.create_tables()
+            self.delete_admin()
+            self.add_admin()
+            self.delete_product()
+            self.add_product()
+
         except(Exception, psycopg2.DatabaseError) as e:
             print('Cannot connect to the database {}'.format(e))
 
@@ -59,9 +79,36 @@ class DatabaseConnection():
                 """
             )
             for query in queries:
+                print('creating tables')
                 self.cursor.execute(query)
         except(Exception, psycopg2.DatabaseError) as e:
             print('Cannot connect to the database {}'.format(e))
+
+
+    def delete_product(self):
+        '''deletes an admin'''
+        query = """DELETE FROM products WHERE product_name = %s"""
+        self.cursor.execute(query, ('baby powder',))
+
+
+    def delete_admin(self):
+        '''deletes an admin'''
+        query = """DELETE FROM attendants WHERE attendant_name = %s"""
+        self.cursor.execute(query, ('admin',))
+
+
+    def add_admin(self):
+        '''registers an admin'''
+        query = """INSERT INTO attendants(attendant_name, contact, password, role) 
+                    VALUES (%s, %s, %s, %s)"""      
+        self.cursor.execute(query, ('admin', '+256-700-000000', 'Admin17', 'admin'))
+
+
+    def add_product(self):
+        '''registers an admin'''
+        query = """INSERT INTO products(product_name, unit_price, quantity, category) 
+                    VALUES (%s, %s, %s, %s)"""      
+        self.cursor.execute(query, ('baby powder', '1500', '180', 'babies'))
 
 
     def delete_tables(self):

@@ -14,8 +14,8 @@ class TestAttendant(Testing):
         resp = self.app.post("/api/v2/auth/login",
                              content_type='application/json',
                              data=Testing.wrong_lfields)
-        self.assertEqual(resp.status_code, 400)
-        self.assertIn(b"Some fields are missing, please check", resp.data) 
+        self.assertEqual(resp.status_code, 401)
+        self.assertIn(b"Invalid username or password", resp.data) 
 
     def test_login_unsuccessful(self):
         ''' test login for wrong credentials '''
